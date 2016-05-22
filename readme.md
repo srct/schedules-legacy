@@ -30,11 +30,7 @@ These instructions are for Ubuntu and Debian, or related Linux distributions. (I
 
 `sudo apt-get install nodejs`
 
-`sudo npm install -g gulp`
-
-`sudo npm install -g bower`
-
-`sudo npm install -g mean-cli`
+That will get you nodejs, from there we haven't yet decided what implementation to go with.
 
 ## Deployment
 
