@@ -1,0 +1,18 @@
+{
+  "name": "schedules",
+  "version": "1.0.0",
+  "description": "Schedules is a web app that allows students to import their class schedules into popular calendar managers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.gmu.edu:srct/schedules.git"
+  },
+  "author": "GMU Student Run Computing and Technology",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
