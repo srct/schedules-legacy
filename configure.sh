@@ -41,9 +41,9 @@ func_brew() {
 }
 func_zypper() {
     echo "Go here: http://software.opensuse.org/download.html?project=devel%3Alanguages%3Anodejs&package=nodejs"
-    echo "Follow the instructions on the Suse website in a different terminal"
+    echo "Follow the instructions on the SUSE website in a different terminal"
     pause 'Press [Enter] key when you have nodejs installed'
-    #Because the SuSE commands were version specific so I give up
+    #Because the SUSE commands were version specific so I give up
 }
 func_emerge() {
     emerge nodejs
