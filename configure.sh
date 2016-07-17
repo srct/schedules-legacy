@@ -1,33 +1,42 @@
 #!/bin/bash +x
+# Function to test whether or not a program is installed on the users machine
 function haveProg() {
     [ -x "$(which "$1")" ]
 }
+# Function to pause excecution till the user presses the enter key
 function pause() {
    read -r -p "$*"
 }
 
 #TODO: Add 'update' commands to these commands
+
+# Handler for Debian based systems with apt
 function func_apt-get() {
     # Install nodejs
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
     sudo apt-get update
     sudo apt-get install nodejs
 }
+# Handler for systems such as Fedora with yum
 function func_yum() {
     sudo curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
     sudo yum -y install nodejs
 }
+# Handler for Arch based systems with pacman
 function func_pacman() {
     sudo pacman -S nodejs npm
 }
+# Handler for macOS and others with homebrew
 function func_brew() {
     brew update
     brew install node npm #both, just in case
 }
+# Function to tell SUSE users to do it themselves because there are version specific instructions
 function func_zypper() {
     echo "Go here: http://software.opensuse.org/download.html?project=devel%3Alanguages%3Anodejs&package=nodejs"
     echo "Follow the instructions on the SUSE website in a different terminal"
-    pause 'Press [Enter] key when you have nodejs installed'
+    # Close with error code 1
+    end 1;
     #Because the SUSE commands were version specific so I give up
 }
 function func_emerge() {
@@ -42,6 +51,7 @@ function func_port() {
 function func_pkgin() {
     pkgin -y install nodejs
 }
+# Function which installs dependencies for the project
 function func_dependencies {
     # Install nodemon
     if haveProg nodemon ; then echo "** nodemon already installed **"
@@ -74,6 +84,7 @@ else
     exit 1
 fi
 
+# Install dependencies regardless
 func_dependencies
 echo "** Installation Completed **"
 echo "** Run './start.sh' to run the server"
