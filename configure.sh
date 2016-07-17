@@ -2,6 +2,9 @@
 haveProg() {
     [ -x "$(which $1)" ]
 }
+pause() {
+   read -p "$*"
+}
 
 if haveProg apt-get ; then func_apt-get
 elif haveProg yum ; then func_yum
@@ -11,7 +14,7 @@ elif haveProg emerge ; then func_emerge
 elif haveProg zypper ; then func_zypper
 elif haveProg pkg ; then func_pkg
 elif haveProg port ; then func_port
-
+elif haveProg pkgin ; then func_pkgin
 else
     echo 'No supported package manager found!'
     exit 2
@@ -38,6 +41,7 @@ func_brew() {
 }
 func_zypper() {
     echo "Go here: http://software.opensuse.org/download.html?project=devel%3Alanguages%3Anodejs&package=nodejs"
+    pause 'Press [Enter] key when you have nodejs installed'
     #Because the SuSE commands were version specific so I give up
 }
 func_emerge() {
@@ -48,6 +52,9 @@ func_pkg() {
 }
 func_port() {
     port install nodejs
+}
+func_pkgin() {
+    pkgin -y install nodejs
 }
 
 # Install npm dependencies
