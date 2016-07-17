@@ -14,11 +14,7 @@ The project manager for this project is [Mark Stenglein](mstengle@gmu.edu), and 
 
 Please visit the [SRCT Wiki](http://wiki.srct.gmu.edu/) for more information on this and other SRCT projects, along with other helpful links and tutorials.
 
-## Setting everything up for development
-
-These instructions are for Ubuntu and Debian, or related Linux distributions. (If you'd like to help write the instructions for Mac OSX, please do!)
-
-### Prerequisities
+## [Setting everything up for development](https://git.gmu.edu/srct/schedules/wikis/Setup)
 
 Installation requirements for many operating systems are located on the [Project Wiki](https://git.gmu.edu/srct/schedules/wikis/Setup).
 
