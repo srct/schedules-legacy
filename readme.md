@@ -20,17 +20,7 @@ These instructions are for Ubuntu and Debian, or related Linux distributions. (I
 
 ### Prerequisities
 
-On Ubuntu and Debian systems, setup is made super simple by the inclusion of a configuration script. Simply install git if you do not have it already, clone down the repository, and run the script. After the script finishes it will start the server in debug mode for you to see the site.
-
-`sudo apt-get install git`
-
-`git clone git@git.gmu.edu:srct/schedules.git`
-
-`sudo ./configure.sh`
-
-**Note:** To start the server easilly, simply go to the root folder of the project and type:
-
-`./start.sh`
+Installation requirements for many operating systems are located on the [Project Wiki](https://git.gmu.edu/srct/schedules/wikis/Setup).
 
 ## Deployment
 
