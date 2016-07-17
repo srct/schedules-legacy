@@ -69,17 +69,11 @@ elif haveProg pkg ; then func_pkg
 elif haveProg port ; then func_port
 elif haveProg pkgin ; then func_pkgin
 else
-    echo 'No supported package manager found!'
-    read -r -p "Do you want to continue (you'll need nodejs and npm) [y/N] " response
-    case $response in
-        [yY][eE][sS]|[yY])
-            #Continues script
-            ;;
-        *)
-            exit 2
-            ;;
-    esac
+    echo '** No supported package manager found!'
+    echo '** Node.js not found!'
+    exit 1
 fi
 
+func_dependencies
 echo "** Installation Completed **"
-echo "Run './start.sh' to run the server"
+echo "** Run './start.sh' to run the server"
