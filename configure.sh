@@ -39,15 +39,19 @@ function func_zypper() {
     end 1;
     #Because the SUSE commands were version specific so I give up
 }
+# Handler for Gentoo systems with emerge
 function func_emerge() {
     emerge nodejs
 }
+# Handler for FreeBSD and other systems with pkg
 function func_pkg() {
     pkg install node
 }
+# Handler for macOS and others with MacPorts - because some people hate Homebrew
 function func_port() {
     port install nodejs
 }
+# Handler for a variety of other systems with pkgin
 function func_pkgin() {
     pkgin -y install nodejs
 }
