@@ -17,7 +17,15 @@ elif haveProg port ; then func_port
 elif haveProg pkgin ; then func_pkgin
 else
     echo 'No supported package manager found!'
-    exit 2
+    read -r -p "Do you want to continue (you'll need nodejs and npm) [y/N] " response
+    case $response in
+        [yY][eE][sS]|[yY])
+            #Continues script
+            ;;
+        *)
+            exit 2
+            ;;
+    esac
 fi
 
 #TODO: Add 'update' commands to these commands
