@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div.conainter-fluid
+    div.row
+      div#main-app.col-lg-8
+        center
+          h1 Schedules
+          em Description Here
+      div#registered-classes.col-lg-4(style='background-color: red;')
+        center
+          h1 Registered Classes
