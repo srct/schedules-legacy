@@ -1,2 +1,2 @@
 cd schedules
-DEBUG=myapp:* npm start
+DEBUG=myapp:* nodemon start
