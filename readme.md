@@ -46,3 +46,8 @@ Contact the project manager or any of its developers if you'd like help picking 
 ## About Mason SRCT
 
 **S**tudent - **R**un **C**omputing and **T**echnology (*SRCT*, pronounced "circuit") is a student organization at George Mason University which enhances student computing at Mason. SRCT establishes and maintains systems which provide specific services for Mason's community.
+
+---
+
+### Credit where due:
+[Calendar](https://thenounproject.com/search/?q=calendar&i=431010) icon by Guilhem from [the Noun Project](https://thenounproject.com)
