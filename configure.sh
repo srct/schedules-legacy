@@ -8,7 +8,7 @@ function pause() {
    read -r -p "$*"
 }
 
-#TODO: Add 'update' commands to these commands
+#TODO:  If you wanted to, add 'update' commands to the remaining systems that need them.
 
 # Handler for Debian based systems with apt
 function func_apt-get() {
@@ -20,10 +20,12 @@ function func_apt-get() {
 # Handler for systems such as Fedora with yum
 function func_yum() {
     sudo curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
+    sudo yum check-update
     sudo yum -y install nodejs
 }
 # Handler for Arch based systems with pacman
 function func_pacman() {
+    sudo pacman -Syy
     sudo pacman -S nodejs npm
 }
 # Handler for macOS and others with homebrew
