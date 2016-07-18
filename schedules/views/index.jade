@@ -4,9 +4,24 @@ block content
   div.containter-fluid
     div.row
       div.col-md-8
-        center
-          h1 Schedules
-          em Description Here
-      div.col-md-4(style='background-color: red;')
+        div.row
+          center
+            h1 Schedules
+            em Description Here
+        div.row
+          ul#search-type.nav.nav-tabs
+            li#search-tab(role='presentation')
+              a(href='#search' role='tab') Search for Classes
+            li#import-tab(role='presentation')
+              a(href='#import' role='tab') Batch Import
+          div#tab-contents.tab-content
+            div#search.tab-pane.fade(role='tabpanel')
+                p
+                  This is the search tab.
+            div#import.tab-pane.fade(role='tabpanel')
+                p
+                  This is the import tab.
+        
+      div#registered-classes.col-md-4(style='background-color: red;')
         center
           h1 Registered Classes
