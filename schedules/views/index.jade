@@ -8,10 +8,25 @@ block content
           h1 Schedules
           em Description Here
           ul#search-type.nav.nav-tabs
-            li.active
-              a(href='#') Search for Classes
-            li
-              a(href='#') Batch Import
+            li#search-tab(role='presentation')
+              a(href='#search' role='tab') Search for Classes
+            li#import-tab(role='presentation')
+              a(href='#import' role='tab') Batch Import
+          div#tab-contents.tab-content
+            div#search.tab-pane.fade(role='tabpanel')
+                p
+                  This is the search tab.
+            div#import.tab-pane.fade(role='tabpanel')
+                p
+                  This is the import tab.
       div#registered-classes.col-lg-4(style='background-color: red;')
         center
           h1 Registered Classes
+
+
+script(type='text/javascript')
+  $('#searchType a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+  })
+  $('#search-type a[href="#search"]').tab('show')
