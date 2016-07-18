@@ -1,5 +1,38 @@
+// This file extends the layout.jade file
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div.containter-fluid
+    div.row
+      // Main site column
+      div.col-md-8
+        // Site branding row
+        div.row.center
+          center
+            // Font Awesome stack of circle and calendar for logo
+            span.fa-stack.fa-lg.fa-5x
+              i.fa.fa-circle-thin.fa-stack-2x(aria-hidden='true')
+              i.fa.fa-calendar.fa-stack-1x(aria-hidden='true')
+            // Title for the site
+            h1 #{config.siteName}
+            em #{config.siteDescription}
+        div.row
+          div.col-md-1
+          div.col-md-10
+            ul#search-type.nav.nav-tabs
+              li#search-tab(role='presentation')
+                a(href='#search' role='tab') Search for Classes
+              li#import-tab(role='presentation')
+                a(href='#import' role='tab') Batch Import
+            div#tab-contents.tab-content
+              div#search.tab-pane.fade(role='tabpanel')
+                  p
+                    This is the search tab.
+              div#import.tab-pane.fade(role='tabpanel')
+                  p
+                    This is the import tab.
+          div.col-md-1
+        
+      div#registered-classes.col-md-4(style='background-color: red;')
+        center
+          h1 Registered Classes
