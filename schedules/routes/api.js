@@ -13,16 +13,16 @@ var schools = [
 ]
 
 /* GET Schools listing. */
-router.get('/lists/schools', function(req, res, next) {
+router.get('/api/lists/schools', function(req, res, next) {
   res.send(JSON.stringify(schools));
 });
 
 // GET ical file
-router.get('/ical/:year/:season/:crns', function(req, res) {
+router.get('/api/:format/:school/:semester/:crns', function(req, res) {
   var crns = req.params['crns'].split(',');
   var format = req.params['format'];
-  var year = req.params['year'];
-  var season = req.params['season'];
+  var school = req.params['school'];
+  var semester = req.params['semester'];
   var crnNums = [{
     format,
     year,
