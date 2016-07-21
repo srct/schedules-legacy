@@ -14,22 +14,28 @@ block content
           div.col-md-1
           // Content div
           div.col-md-10
-            // Tabbed navigation
-            div
-              ul.nav.nav-tabs.nav-justified(role='tablist')
-                li.active(role='presentation')
-                  a(href='#search' aria-controls='search' role='tab' data-toggle='tab') Search for Classes
-                li(role='presentation')
-                  a(href='#import' aria-controls='import' role='tab' data-toggle='tab') Batch Import
-              // Content within the tabs here
-              div.tab-content
-                div#search.tab-pane.active(role='tabpanel' style='background-color: red')
-                  h3.center-text Search For Classes
-                div#import.tab-pane(role='tabpanel' style='background-color: blue')
-                  h3.center-text Import Classes by CRN
+            div.row
+              div.col-md-2
+              div.col-md-8
+                br
+                div.input-group
+                  span.input-group-btn
+                    button.btn.btn-info(type="button") Import CRN's
+                  input.form-control(type="text" placeholder="Enter class CRN's separated by commas...")
+                br
+                div.input-group
+                  span.input-group-btn
+                    button.btn.btn-info(type="button")
+                      i.fa.fa-search
+                  input.form-control(type="text" placeholder="Search for classes...")
+              div.col-md-2
           // Right padding
           div.col-md-1
       // Registration cart div
-      div#sidebar.col-md-4(style='background-color: red;')
-        center
-          h1 Registered Classes
+      div#sidebar.col-md-4
+        div.row
+          div.col-md-11
+            div#registeredClasses.row
+              div.well
+                  h2 Registered Classes
+          div.col-md-1

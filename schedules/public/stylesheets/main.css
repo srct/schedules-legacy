@@ -5823,11 +5823,4 @@ button.close {
 html, body {
   height: 100%; }
 
-.container-fluid, .row {
-  height: 100%; }
-
-#sidebar {
-  margin-bottom: -9999px;
-  padding-bottom: 9999px; }
-
 /*# sourceMappingURL=main.css.map */
