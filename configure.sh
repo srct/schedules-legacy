@@ -44,12 +44,18 @@ elif haveProg brew
   then
     brew update
     brew install node npm
-    if ! haveProg mongo ; then echo "** Mac not fully supported, get MongoDB and run this again"
+    if ! haveProg mongo
+      then
+        echo "** Mac not fully supported, get MongoDB and run this again"
+    fi
     exit 1;
 elif haveProg port
   then
     port install nodejs
-    if ! haveProg mongo ; then echo "** Mac not fully supported, get MongoDB and run this again"
+    if ! haveProg mongo
+      then
+        echo "** Mac not fully supported, get MongoDB and run this again"
+    fi
     exit 1;
 fi
 
