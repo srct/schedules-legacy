@@ -48,7 +48,6 @@ elif haveProg brew
       then
         brew install mongodb
     fi
-    exit 1;
 elif haveProg port
   then
     sudo port selfupdate
@@ -57,7 +56,6 @@ elif haveProg port
       then
         sudo port install mongodb
     fi
-    exit 1;
 fi
 
 ## Install node.js dependencies
