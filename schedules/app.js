@@ -31,6 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to mongo
 mongoose.connect(config.mongoDBURL);
+// Populate initial data
+var populateDB = require('./setup/populateDB');
+populateDB();
 
 app.use('/', routes);
 app.use('/api', api);

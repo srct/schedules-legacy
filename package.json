@@ -13,6 +13,7 @@
   "author": "GMU Student Run Computing and Technology",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mongoose": "^4.5.5"
   }
 }
