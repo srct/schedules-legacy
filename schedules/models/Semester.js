@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var semesterSchema = new Schema({
-  school: { type: String, required: true }
+  school: { type: String, required: true },
   semester: { type: String, required: true },
   slug: { type: String, required: true },
   classes: [
@@ -31,7 +31,7 @@ var semesterSchema = new Schema({
 
 // the schema is useless so far
 // we need to create a model using it
-var Semester = mongoose.model('Semester', userSchema);
+var Semester = mongoose.model('Semester', semesterSchema);
 
 // make this available to our users in our Node applications
 module.exports = Semester;

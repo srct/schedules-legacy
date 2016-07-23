@@ -82,10 +82,16 @@ for (var i=0; i < jsonContents.length; i++) {
                 term_classes.push(c);
             }
     }
-var term_classes_json = JSON.stringify(term_classes);
+var semester = {
+  school: 'GMU',
+  semester: 'Fall 2016',
+  slug: 'GMU2016F',
+  classes: term_classes
+}
+var semesterJSON = JSON.stringify(semester);
 
 try {
-  var result = term_classes_json;
+  var result = semesterJSON;
   // write a JSON file.
   var fs = require('fs');
   fs.writeFile('classes2016.json', result, function (err) {
