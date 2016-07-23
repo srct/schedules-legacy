@@ -46,15 +46,16 @@ elif haveProg brew
     brew install node npm
     if ! haveProg mongo
       then
-        echo "** Mac not fully supported, get MongoDB and run this again"
+        brew install mongodb
     fi
     exit 1;
 elif haveProg port
   then
-    port install nodejs
+    sudo port selfupdate
+    sudo port install nodejs
     if ! haveProg mongo
       then
-        echo "** Mac not fully supported, get MongoDB and run this again"
+        sudo port install mongodb
     fi
     exit 1;
 fi
