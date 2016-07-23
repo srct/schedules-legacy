@@ -1,7 +1,7 @@
 // Read in excel file
 if(typeof require !== 'undefined') XLSX = require('xlsx');
 // convert file to workbook
-var workbook = XLSX.readFile('classes2016s.xlsx');
+var workbook = XLSX.readFile('GMU2016SP.xlsx');
 // get sheet
 var worksheet = workbook.Sheets[workbook.SheetNames[0]];
 // convert sheet to JSON
@@ -84,19 +84,25 @@ for (var i=0; i < jsonContents.length; i++) {
     }
 var semester = {
   school: 'GMU',
-  semester: 'Summer 2016',
-  slug: 'GMU2016S',
+  semester: 'Spring 2016',
+  slug: 'GMU2016SP',
   classes: term_classes
 }
 var semesterJSON = JSON.stringify(semester);
+var prettyJSON = JSON.stringify(semester, null, 4);
 
 try {
   var result = semesterJSON;
+  var resultPretty = prettyJSON;
   // write a JSON file.
   var fs = require('fs');
-  fs.writeFile('classes2016s.json', result, function (err) {
+  fs.writeFile('GMU2016SP.min.json', result, function (err) {
     if (err) return console.log(err);
-    console.log('File written to classes2016s.json');
+    console.log('File written to GMU2016SP.min.json');
+  });
+  fs.writeFile('GMU2016SP.json', resultPretty, function (err) {
+    if (err) return console.log(err);
+    console.log('File written to GMU2016SP.min.json');
   });
 } catch (err) {
   // Errors are thrown for bad options, or if the data is empty and no fields are provided.

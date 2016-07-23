@@ -8,7 +8,8 @@ var fs = require("fs");
 //////
 var datafiles = [
   'GMU2016F.min.json',
-  'GMU2016S.min.json'
+  'GMU2016S.min.json',
+  'GMU2016SP.min.json'
 ]
 
 var populateDB = function() {
@@ -23,6 +24,7 @@ var populateDB = function() {
     if (err) { console.error('Database Error!', err) }
     else {
       var findItems = Semester.find();
+      findItems.select('-_id');
       findItems.select('-classes');
 
       findItems.exec(function(err, users) {
