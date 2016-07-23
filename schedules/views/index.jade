@@ -2,37 +2,64 @@
 extends layout
 
 block content
+  script(src='/javascripts/mainApp.js')
   div.containter-fluid
     div.row
       // Main site column
       div.col-md-8
-        // Site branding row
-        div.row.center
-          center
-            // Font Awesome stack of circle and calendar for logo
-            span.fa-stack.fa-lg.fa-5x
-              i.fa.fa-circle-thin.fa-stack-2x(aria-hidden='true')
-              i.fa.fa-calendar.fa-stack-1x(aria-hidden='true')
-            // Title for the site
-            h1 #{config.siteName}
-            em #{config.siteDescription}
+        // Site title include
+        include main-title.jade
+        // Content div
         div.row
+          // Left padding
           div.col-md-1
+          // Content div
           div.col-md-10
-            ul#search-type.nav.nav-tabs
-              li#search-tab(role='presentation')
-                a(href='#search' role='tab') Search for Classes
-              li#import-tab(role='presentation')
-                a(href='#import' role='tab') Batch Import
-            div#tab-contents.tab-content
-              div#search.tab-pane.fade(role='tabpanel')
-                  p
-                    This is the search tab.
-              div#import.tab-pane.fade(role='tabpanel')
-                  p
-                    This is the import tab.
+            div.row
+              div.col-md-2
+              div.col-md-8
+                br
+                div.input-group
+                  span.input-group-btn
+                    button.btn.btn-info(type="button") Import CRN's
+                  input.form-control(type="text" placeholder="Enter CRN's separated by commas...")
+              //  br
+              //  div.input-group
+              //    span.input-group-btn
+              //      button.btn.btn-info(type="button")
+              //        i.fa.fa-search
+              //    input.form-control(type="text" placeholder="Search for classes...")
+              div.col-md-2
+            div.row
+              br
+              div.col-md-12
+                table#classSearch.table.table-striped.table-bordered
+                  thead
+                    tr
+                      th Add
+                      th CRN
+                      th Class
+                      th Title
+                      th Section
+                      th Campus
+                      th Sessions
+                  tbody
+                    tr
+                      td
+                        button.btn.btn-primary(type="button") Add
+                      td 12345
+                      td
+                      td
+                      td
+                      td
+                      td
+          // Right padding
           div.col-md-1
-        
-      div#registered-classes.col-md-4(style='background-color: red;')
-        center
-          h1 Registered Classes
+      // Registration cart div
+      div#sidebar.col-md-4
+        div.row
+          div.col-md-11
+            div#registeredClasses.row
+              div.well
+                  h2 Registered Classes
+          div.col-md-1

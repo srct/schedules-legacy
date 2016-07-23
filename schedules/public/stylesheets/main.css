@@ -5817,4 +5817,10 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.center-text {
+  text-align: center; }
+
+html, body {
+  height: 100%; }
+
 /*# sourceMappingURL=main.css.map */
