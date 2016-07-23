@@ -63,6 +63,9 @@ npm install
 cd schedules
 npm install
 cd ..
+cd dataScrapers/GMU
+npm install
+cd ../..
 echo "** Application installed successfuly"
 echo ""
 echo "** Run ./start.sh to start application"
