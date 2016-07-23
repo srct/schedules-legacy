@@ -39,6 +39,18 @@ elif haveProg yum
     echo ""
     echo "** yum not yet supported, go to https://git.gmu.edu/srct/schedules for help"
     exit 1
+# Handler for mac and macports
+elif haveProg brew
+  then
+    brew update
+    brew install node npm
+    if ! haveProg mongo ; then echo "** Mac not fully supported, get MongoDB and run this again"
+    exit 1;
+elif haveProg port
+  then
+    port install nodejs
+    if ! haveProg mongo ; then echo "** Mac not fully supported, get MongoDB and run this again"
+    exit 1;
 fi
 
 ## Install node.js dependencies
