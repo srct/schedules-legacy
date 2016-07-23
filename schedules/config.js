@@ -7,6 +7,7 @@ config.siteDescription = "A simple application to add your class schedule to cal
 
 // MongoDB config
 config.mongoDBURL = 'mongodb://localhost/myappdatabase';
+config.ReloadDB = true;
 
 config.schoolSlugs = {
   // Slug: Long Name
@@ -16,16 +17,9 @@ config.schoolSlugs = {
 
 // Data files to load:
 config.dataFiles = [
-  {
-    // URL Slug for the API
-    slug: 'GMU',
-    // List of .json files to import (place in setup folder under SLUG folder)
-    dataSource: [
-      'fall2016GMU' // IE: get's put in 'setup/GMU/fall2016GMU.json'
-    ],
-    // Whether to actually import the data
-    enabled: false
-  }
+  'GMU2016F.min.json',
+  'GMU2016S.min.json',
+  'GMU2016SP.min.json'
 ]
 
 module.exports = config;

@@ -1,24 +1,27 @@
 var express = require('express');
-var router = express.Router();
+var mongoose = require('mongoose');
+var Semester = require('../models/Semester');
+var api = express.Router();
+
+// Load site wide configurations
+var config = require('../config');
 
 /* GET Schools listing. */
-router.get('/api/lists/schools', function(req, res, next) {
+api.get('/api/lists/schools', function(req, res, next) {
   res.send(JSON.stringify(schools));
 });
 
 // GET ical file
-router.get('/api/:format/:school/:semester/:crns', function(req, res) {
-  var crns = req.params['crns'].split(',');
-  var format = req.params['format'];
-  var school = req.params['school'];
-  var semester = req.params['semester'];
-  var crnNums = [{
-    format,
-    year,
-    season,
-    crns
-  }];
+api.get('/api/json/:SEMSLUG', function(req, res) {
+  var slug = req.params['SEMSLUG'];
+
+  // find each person with matching slug
+  var query = Semester.findOne({ 'slug': slug });
+  query.exec(function (err, semester) {
+    if (err || (! semester)) { res.json({ 'results' : 'error, try something different' }) }
+    else {res.json(semester);}
+  })
   res.send(crnNums);
 });
 
-module.exports = router;
+module.exports = api;

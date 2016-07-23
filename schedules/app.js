@@ -36,7 +36,7 @@ var populateDB = require('./setup/populateDB');
 populateDB();
 
 app.use('/', routes);
-app.use('/api', api);
+//app.use('/api/', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
