@@ -13,14 +13,24 @@ var datafiles = [
 
 var populateDB = function() {
   emptySemesters(); // NOTE: this is an asynchronous call
+  var semesters = [];
   for (var i = 0; i < datafiles.length; i++) {
     var datafile = datafiles[i];
     var semester = new Semester(JSON.parse(fs.readFileSync("./setup/dataFiles/" + datafile)));
-    semester.save(function(err) {
-      if (err) { console.error('Database Error!', err) }
-      else {console.log("write successful");}
-    })
+    semesters.push(semester.toObject());
   }
+  Semester.collection.insert(semesters, function(err) {
+    if (err) { console.error('Database Error!', err) }
+    else {
+      var findItems = Semester.find();
+      findItems.select('-classes');
+
+      findItems.exec(function(err, users) {
+        if (err) {console.error(err); }
+        else { console.log(users); }
+      });
+    }
+  });
 }
 
 // Empty collections
