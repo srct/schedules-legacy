@@ -1,4 +1,4 @@
 cd schedules
-sudo service mongod start
+sudo systemctl start mongodb
 echo "** visit localhost:3000 for the server"
 DEBUG=myapp:* nodemon start
