@@ -12,7 +12,7 @@ var term_classes = [];
 // Loop through al of the different objects parsed by the xlsx to json conversion
 for (var i=0; i < jsonContents.length; i++) {
         var currentItem = jsonContents[i];
-        // Filter out all of the non-entrys8
+        // Filter out all of the non-entrys
         if (currentItem['COURSE SECTION'] != 'Total') {
                 var c = {};
                 c.crn = currentItem['CRN'];
@@ -49,18 +49,29 @@ for (var i=0; i < jsonContents.length; i++) {
                   end.substring(0, 2) +
                   ', ' +
                   yr;
+
                 session.days = currentItem['DAYS'];
-                if (session.days === '...None') { session.days = ''; }
+
+                if (session.days === '...None') {
+                  session.days = '';
+                }
+
                 session.time = currentItem['TIMES'];
-                if (session.time === ' - ') { session.time = '' }
+                if (session.time === ' - ') {
+                  session.time = ''
+                }
+
                 session.location = currentItem['LOCATION'];
                 session.class_type = currentItem['SCHEDULE TYPE'];
+
                 if (currentItem['INSTRUCTOR']) {
                   var instructorsStart = currentItem['INSTRUCTOR'].split(", ");
                   session.instructors = instructorsStart[1] + ' ' + instructorsStart[0];
-                } else {
+                }
+                else {
                   session.instructors = "unknown";
                 }
+
                 // Add an extra space so it doesnt get cut off
                 session.instructors = session.instructors + ' ';
                 //if (c.instructors_lower) {
@@ -73,25 +84,8 @@ for (var i=0; i < jsonContents.length; i++) {
     }
 var term_classes_json = JSON.stringify(term_classes);
 
-// convert to cvs
-var json2csv = require('json2csv');
-var fields = [
-  'crn',
-  'name',
-  'title',
-  'section',
-  'campus',
-  'session_templates[0].date_range',
-  'session_templates[0].days',
-  'session_templates[0].time',
-  'session_templates[0].location',
-  'session_templates[0].class_type',
-  'session_templates[0].instructors'
-]
 try {
-  //var result = json2csv({ data: term_classes, fields: fields });
   var result = term_classes_json;
-  //result = result.substring(result.indexOf("\n") + 1);
   // write a JSON file.
   var fs = require('fs');
   fs.writeFile('classes2016.json', result, function (err) {
