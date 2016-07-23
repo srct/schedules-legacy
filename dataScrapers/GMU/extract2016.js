@@ -89,11 +89,12 @@ var fields = [
   'session_templates[0].instructors'
 ]
 try {
-  var result = json2csv({ data: term_classes, fields: fields });
-  result = result.substring(result.indexOf("\n") + 1);
+  //var result = json2csv({ data: term_classes, fields: fields });
+  var result = term_classes_json;
+  //result = result.substring(result.indexOf("\n") + 1);
   // write a JSON file.
   var fs = require('fs');
-  fs.writeFile('classes2016.csv', result, function (err) {
+  fs.writeFile('classes2016.json', result, function (err) {
     if (err) return console.log(err);
     console.log('File written to classes2016.json');
   });
