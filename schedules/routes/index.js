@@ -18,12 +18,12 @@ router.get('/api/json/classes/:SEMSLUG', function(req, res) {
   {
     jsonSlugCache[slug].timesUsed++;
     console.log(jsonSlugCache[slug].timesUsed)
-    console.log(jsonSlugCache[slug].tiemsUsed);
     res.send(jsonSlugCache[slug]['value']);
   }
   else {
     // find each person with matching slug
     var query = Semester.findOne({ 'slug': slug });
+    query.select('classes');
     query.exec(function (err, semester) {
       if (err || (! semester)) {
         res.json({
@@ -44,7 +44,6 @@ router.get('/api/json/classes/:SEMSLUG', function(req, res) {
           delete jsonSlugCache[jsonSlugCache.slugs[leastUsed]];
           jsonSlugCache.slugs.splice(leastUsed, 1);
         }
-        console.log(JSON.stringify(semester))
         jsonSlugCache[slug] = {
           'timesUsed' : 1
         }
