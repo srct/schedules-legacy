@@ -1,17 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var schools = [
-  {
-    displayName: 'George Mason University',
-    shortcode:   'GMU'
-  },
-  {
-    displayName: 'Virginia Tech',
-    shortcode:   'VT'
-  }
-]
-
 /* GET Schools listing. */
 router.get('/api/lists/schools', function(req, res, next) {
   res.send(JSON.stringify(schools));

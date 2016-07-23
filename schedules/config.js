@@ -8,11 +8,15 @@ config.siteDescription = "A simple application to add your class schedule to cal
 // MongoDB config
 config.mongoDBURL = 'mongodb://localhost/myappdatabase';
 
+config.schoolSlugs = {
+  // Slug: Long Name
+  'GMU': 'George Mason University',
+  'VT' : 'Virginia Tech'
+}
+
 // Data files to load:
 config.dataFiles = [
   {
-    // Pretty Name
-    school: 'George Mason University',
     // URL Slug for the API
     slug: 'GMU',
     // List of .json files to import (place in setup folder under SLUG folder)

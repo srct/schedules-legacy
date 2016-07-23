@@ -1,5 +1,3 @@
-// Included as an example model temporarilly
-
 // grab the things we need
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;

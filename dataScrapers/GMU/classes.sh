@@ -3,4 +3,4 @@ touch classes2016.json
 node extract2016.js
 
 echo "Copy the json file to the appropriate folder in the app and"
-echo "add it's information to "
+echo "add it's information to config.js"
