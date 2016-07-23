@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var config = require('./config');
 
 var routes = require('./routes/index');
-var api = require('./routes/api');
+//var api = require('./routes/api');
 
 var app = express();
 

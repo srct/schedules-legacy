@@ -3,7 +3,6 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Semester = require('../models/Semester');
 
-
 // Load site wide configurations
 var config = require('../config');
 
@@ -12,15 +11,49 @@ router.get('/docs', function(req, res, next) {
 })
 
 // GET ical file
-router.get('/api/json/:SEMSLUG', function(req, res) {
+var jsonSlugCache = { slugs: [] };
+router.get('/api/json/classes/:SEMSLUG', function(req, res) {
   var slug = req.params['SEMSLUG'];
-
-  // find each person with matching slug
-  var query = Semester.findOne({ 'slug': slug });
-  query.exec(function (err, semester) {
-    if (err || (! semester)) { res.json({ 'results' : 'error, try something different' }) }
-    else {res.json(semester);}
-  })
+  if (jsonSlugCache[slug])
+  {
+    jsonSlugCache[slug].timesUsed++;
+    console.log(jsonSlugCache[slug].timesUsed)
+    console.log(jsonSlugCache[slug].tiemsUsed);
+    res.send(jsonSlugCache[slug]['value']);
+  }
+  else {
+    // find each person with matching slug
+    var query = Semester.findOne({ 'slug': slug });
+    query.exec(function (err, semester) {
+      if (err || (! semester)) {
+        res.json({
+           'results' : 'error, try something different'
+        })
+      }
+      else {
+        if (jsonSlugCache.slugs.length > 10) {
+          var leastUsedAmount = jsonSlugCache[jsonSlugCache.slugs[0]].timesUsed;
+          var leastUsed = 0;
+          for (var i = 0; i < jsonSlugCache.slugs.length; i++) {
+            var amountUsed = jsonSlugCache[jsonSlugCache.slugs[i]].timesUsed;
+            if (amountUsed < leastUsedAmount) {
+              leastUsedAmount = amountUsed;
+              leastUsed = i;
+            }
+          }
+          delete jsonSlugCache[jsonSlugCache.slugs[leastUsed]];
+          jsonSlugCache.slugs.splice(leastUsed, 1);
+        }
+        console.log(JSON.stringify(semester))
+        jsonSlugCache[slug] = {
+          'timesUsed' : 1
+        }
+        jsonSlugCache[slug].value = JSON.stringify(semester);
+        jsonSlugCache.slugs.push(slug);
+        res.send(jsonSlugCache[slug].value);
+      }
+    })
+  }
 });
 
 // TODO: Actually learn how to make this function set be passed around properly
