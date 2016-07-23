@@ -17,8 +17,8 @@ var semesterSchema = new Schema({
       session_templates: [
         {
           date_range: { type: String, required: true },
-          days: { type: String, required: true },
-          time: { type: String, required: true },
+          days: { type: String },
+          time: { type: String },
           location: { type: String, required: true },
           class_type: { type: String, required: true },
           instructors: { type: String, required: true },
