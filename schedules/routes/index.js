@@ -12,7 +12,7 @@ router.get('/docs', function(req, res, next) {
 
 // GET ical file
 var jsonSlugCache = { slugs: [] };
-router.get('/api/json/classes/:SEMSLUG', function(req, res) {
+router.get('/api/json/classes/:SEMSLUG', function(req, res, next) {
   var slug = req.params['SEMSLUG'];
   if (jsonSlugCache[slug])
   {
@@ -23,7 +23,7 @@ router.get('/api/json/classes/:SEMSLUG', function(req, res) {
   else {
     // find each person with matching slug
     var query = Semester.findOne({ 'slug': slug });
-    query.select('classes');
+    query.select('-_id -classes._id -classes.session_templates._id');
     query.exec(function (err, semester) {
       if (err || (! semester)) {
         res.json({
