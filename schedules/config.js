@@ -6,8 +6,8 @@ config.siteName = "Schedules";
 config.siteDescription = "A simple application to add your class schedule to calendar applications like Outlook and Google Calendar."
 
 // MongoDB config
-config.mongoDBURL = 'mongodb://localhost/myappdatabase';
-config.ReloadDB = true;
+config.mongoDBURL = 'mongodb://localhost/schedules';
+config.ReloadDB = false;
 
 config.schoolSlugs = {
   // Slug: Long Name
