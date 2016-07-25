@@ -12,6 +12,7 @@
     "express": "~4.13.4",
     "jade": "~1.11.0",
     "mongoose": "^4.5.5",
+    "mongoose-redis-cache": "0.0.3",
     "morgan": "~1.7.0",
     "node-sass": "^3.8.0",
     "node-sass-middleware": "0.8.0"

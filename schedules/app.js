@@ -4,6 +4,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var mongooseRedisCache = require("mongoose-redis-cache");
 
 // Load site wide configurations
 var config = require('./config');
@@ -31,6 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to mongo
 mongoose.connect(config.mongoDBURL);
+mongooseRedisCache(mongoose)
+
 // Populate initial data
 var populateDB = require('./setup/populateDB');
 populateDB();
