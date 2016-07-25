@@ -29,6 +29,8 @@ var semesterSchema = new Schema({
   ]
 });
 
+semesterSchema.set('redisCache', true)
+
 // the schema is useless so far
 // we need to create a model using it
 var Semester = mongoose.model('Semester', semesterSchema);

@@ -7,7 +7,7 @@ config.siteDescription = "A simple application to add your class schedule to cal
 
 // MongoDB config
 config.mongoDBURL = 'mongodb://localhost/schedules';
-config.ReloadDB = false;
+config.ReloadDB = true;
 
 config.schoolSlugs = {
   // Slug: Long Name
