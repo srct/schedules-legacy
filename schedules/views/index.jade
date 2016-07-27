@@ -19,10 +19,37 @@ block content
               div.col-md-2
               div.col-md-8
                 br
-                div.input-group
-                  span.input-group-btn
-                    button.btn.btn-info(type="button") Import CRN's
-                  input.form-control(type="text" placeholder="Enter CRN's separated by commas...")
+
+                form.form-horizontal
+                  fieldset
+
+                    // Form Name
+                    legend Enter Your Schedule's Details Here
+
+                    // Select Basic
+                    div.form-group
+                      label.col-md-4.control-label(for='selectSchool') Select a School
+                      div.col-md-6
+                        select#selectSchool.form-control(name="selectSchool" class="form-control")
+                          option(value="1") George Mason University
+                          option(value="2") Virginia Tech
+
+                    // Select Basic
+                    div.form-group
+                      label.col-md-4.control-label(for="selectSemester") Select a Semester
+                      div.col-md-6
+                        select#selectSemester.form-control(name="selectSemester")
+                          option(value="1") Option one
+                          option(value="2") Option two
+
+                    // Text input
+                    div.form-group
+                      label.col-md-4.control-label(for="crnInput") Enter Courses
+                      div.col-md-6
+                        input#crnInput.form-control.input-md(name="crnInput" placeholder="Enter CRN's" type="text")
+                        span.help-block Enter course numbers separated by commas to batch import your classes.
+
+
               //  br
               //  div.input-group
               //    span.input-group-btn

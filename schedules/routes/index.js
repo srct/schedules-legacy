@@ -6,12 +6,13 @@ var Semester = require('../models/Semester');
 // Load site wide configurations
 var config = require('../config');
 
-router.get('/docs', function(req, res, next) {
-  res.render('docs', { config });
-})
+router.get('/api/json/classes/:SEMSLUG/:CRNS', function(req, res, next) {
+  var slug = req.params['SEMSLUG'];
+  var crns = req.params['CRNS'].split(',');
+  
+});
 
-// GET ical file
-var jsonSlugCache = { slugs: [] };
+// GET entire semester
 router.get('/api/json/classes/:SEMSLUG', function(req, res, next) {
   var slug = req.params['SEMSLUG'];
   if (jsonSlugCache[slug])
@@ -27,7 +28,7 @@ router.get('/api/json/classes/:SEMSLUG', function(req, res, next) {
     query.lean().exec(function (err, semester) {
       if (err || (! semester)) {
         res.json({
-           'results' : 'error, try something different'
+           'error' : 'semester not found'
         })
       }
       else {res.json(semester);}
@@ -35,7 +36,11 @@ router.get('/api/json/classes/:SEMSLUG', function(req, res, next) {
   }
 });
 
-// TODO: Actually learn how to make this function set be passed around properly
+// END API SECTION
+
+router.get('/docs', function(req, res, next) {
+  res.render('docs', { config });
+})
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
