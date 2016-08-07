@@ -9,8 +9,9 @@ var mongooseRedisCache = require("mongoose-redis-cache");
 // Load site wide configurations
 var config = require('./config');
 
+// Load in Routes
 var routes = require('./routes/index');
-//var api = require('./routes/api');
+var apiV1 = require('./routes/api/v1');
 
 var app = express();
 
@@ -39,7 +40,7 @@ var populateDB = require('./setup/populateDB');
 populateDB();
 
 app.use('/', routes);
-//app.use('/api/', api);
+app.use('/api/v1', apiV1);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
