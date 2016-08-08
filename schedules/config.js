@@ -10,9 +10,18 @@ config.mongoDBURL = 'mongodb://localhost/schedules';
 config.ReloadDB = false;
 
 config.schoolSlugs = {
-  // Slug: Long Name
-  'GMU': 'George Mason University',
-  'VT' : 'Virginia Tech'
+  'GMU': {
+    'longName': 'George Mason University',
+    'semesters': [
+      {'GMU2016F': 'Fall 2016'},
+      {'GMU2016S': 'Summer 2016'},
+      {'GMU2016SP': 'Spring 2016'}
+    ]
+  },
+  'VT' : {
+    'longName': 'Virginia Tech',
+    'semesters': []
+  },
 }
 
 // Data files to load:

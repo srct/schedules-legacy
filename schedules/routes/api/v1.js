@@ -15,16 +15,9 @@ var config = require('../../config');
 ////////////////////////////////////////////////////////////////////////////////
 // JSON API Section
 
-// Get school and school slug listing
+// Get school and semester slug listing
 router.get('/json/schools', function(req, res, next) {
   res.json(config.schoolSlugs);
-});
-
-// TODO: FINISH THIS
-// Get semester and semester slug listing for a given school
-router.get('/json/semesters/:SCHOOL', function(req, res, next) {
-  var schoolSlug = req.params['SCHOOL'];
-  res.json({'TODO': schoolSlug});
 });
 
 // GET classes for a semester
