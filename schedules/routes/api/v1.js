@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////////////////
+//                         Mason SRCT: Schedules API v1
+// - This API supports the Schedules project at schedules.gmu.edu as the backend
+//   data source for the application sent on the front end.
+////////////////////////////////////////////////////////////////////////////////
+
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
@@ -5,9 +11,6 @@ var Semester = require('../../models/Semester');
 
 // Load site wide configurations
 var config = require('../../config');
-
-// Setup Slug Cache for redis cache
-var jsonSlugCache = { slugs: [] };
 
 ////////////////////////////////////////////////////////////////////////////////
 // JSON API Section
