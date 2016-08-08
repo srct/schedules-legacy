@@ -11,6 +11,7 @@ var config = require('./config');
 
 // Load in Routes
 var routes = require('./routes/index');
+var docs = require('./routes/docs');
 var apiV1 = require('./routes/api/v1');
 
 var app = express();
@@ -40,6 +41,7 @@ var populateDB = require('./setup/populateDB');
 populateDB();
 
 app.use('/', routes);
+app.use('/docs', docs);
 app.use('/api/v1', apiV1);
 
 // catch 404 and forward to error handler
