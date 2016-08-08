@@ -29,7 +29,7 @@ var semesterSchema = new Schema({
   ]
 });
 
-semesterSchema.set('redisCache', true)
+semesterSchema.set('redisCache', true);
 
 // the schema is useless so far
 // we need to create a model using it

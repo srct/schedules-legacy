@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to mongo
 mongoose.connect(config.mongoDBURL);
-mongooseRedisCache(mongoose)
+mongooseRedisCache(mongoose);
 
 // Populate initial data
 var populateDB = require('./setup/populateDB');
@@ -74,6 +74,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
