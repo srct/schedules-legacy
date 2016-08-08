@@ -10,6 +10,10 @@ config.mongoDBURL = 'mongodb://localhost/schedules';
 config.ReloadDB = false;
 
 config.schoolSlugs = {
+  'schools': [
+    'GMU',
+    'VT'
+  ],
   'GMU': {
     'longName': 'George Mason University',
     'semesters': [
