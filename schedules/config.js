@@ -17,9 +17,18 @@ config.schoolSlugs = {
   'GMU': {
     'longName': 'George Mason University',
     'semesters': [
-      {'GMU2016F': 'Fall 2016'},
-      {'GMU2016S': 'Summer 2016'},
-      {'GMU2016SP': 'Spring 2016'}
+      {
+        slug: 'GMU2016F',
+        longName: 'Fall 2016'
+      },
+      {
+        slug: 'GMU2016S',
+        longName: 'Summer 2016'
+      },
+      {
+        slug: 'GMU2016SP',
+        longName: 'Spring 2016'
+      }
     ]
   },
   'VT' : {
