@@ -33,6 +33,14 @@ if [ "$DISTRIB_ID" == "Ubuntu" ]
         sudo apt-get install -y mongodb-org
         ## Service is started in start.sh file
     fi
+    if ! haveProg redis-server
+      then
+        echo "** Installing redis-server"
+        sudo apt-get install -y redis-server
+        sudo mv /etc/redis/redis.conf /etc/redis/redis.conf.backup
+        sudo cp setupFiles/redis.conf /etc/redis/redis.conf
+        echo "** redis-server installed and configured"
+    fi
 elif haveProg yum
   then
     echo "** Installing as yum manager"
