@@ -1,3 +1,12 @@
+////////////////////////////////////////////////////////////////////////////////
+//              Mason SRCT: Schedules Application Main File
+// - This is the main file for the schedules app, which loads in all of the
+//   configuration and routing files. Essentially, any other file eventually
+//   leads here.
+// - Take care with this file, it can hurt if you mess it up.
+////////////////////////////////////////////////////////////////////////////////
+
+// Load in the different packages
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -10,10 +19,12 @@ var mongooseRedisCache = require("mongoose-redis-cache");
 var config = require('./config');
 
 // Load in Routes
+// TODO: Make this a dynamic loading system that simply scans the directory
 var routes = require('./routes/index');
 var docs = require('./routes/docs');
 var apiV1 = require('./routes/api/v1');
 
+// Instantiate the application
 var app = express();
 
 // view engine setup
@@ -34,12 +45,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to mongo
 mongoose.connect(config.mongoDBURL);
+// Setup the mongo redis caching for performance
 mongooseRedisCache(mongoose);
 
 // Populate initial data
 var populateDB = require('./setup/populateDB');
 populateDB();
 
+// Actually use the loaded routes
+// TODO: make this automatic instead of being manually entered
 app.use('/', routes);
 app.use('/docs', docs);
 app.use('/api/v1', apiV1);
