@@ -74,6 +74,16 @@ cd ..
 cd dataScrapers/GMU
 npm install
 cd ../..
+
+echo "** installing nodemon"
+
+if ! haveProg nodemon
+  then
+    sudo npm install -g nodemon
+  else
+    echo "** nodemon installed already"
+fi
+
 echo "** Application installed successfuly"
 echo ""
 echo "** Run ./start.sh to start application"
