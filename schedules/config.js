@@ -15,6 +15,9 @@ config.siteDescription = "A simple application to add your class schedule to cal
 config.mongoDBURL = 'mongodb://localhost/schedules';
 config.ReloadDB = false;
 
+// Object given to the front end to populate the semester and school selection
+//   dropdown lists.
+// TODO: Make this dynamic instead of hard coding it into the system.
 config.schoolSlugs = {
   'schools': [
     'GMU',
@@ -44,6 +47,10 @@ config.schoolSlugs = {
 }
 
 // Data files to load:
+// TODO: Make this dynamic instead of hard coding it into the system. This is
+//       neccessary in order to make it so that the system can be updated from
+//       the site itself instead of relying on @patriot_down to upload the files
+//       from the backend.
 config.dataFiles = [
   'GMU2016F.min.json',
   'GMU2016S.min.json',
