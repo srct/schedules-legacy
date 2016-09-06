@@ -1,0 +1,11 @@
+//-/////////////////////////////////////////////////////////////////////////////
+//-                     Mason SRCT: Schedules Error Page
+//- - For any given error, this page will render, showing a stacktrace.
+//- - When not in dev mode, this will not render.
+//-/////////////////////////////////////////////////////////////////////////////
+extends layout
+
+block content
+  h1= message
+  h2= error.status
+  pre #{error.stack}
