@@ -8,6 +8,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Semester = require('../../models/Semester');
+var ical = require('ical-generator');
 
 // Load site wide configurations
 var config = require('../../config');
@@ -45,5 +46,12 @@ router.get('/json/classes/:SEMSLUG', function(req, res, next) {
 
 ////////////////////////////////////////////////////////////////////////////////
 // ICAL API Section
+router.get('/ical/:SCHOOL/:SEMSLUG/:CLASSES', function(req, res, next) {
+  var schoolSlug = req.params['SCHOOL'];
+  var semSlug = req.params['SEMSLUG'];
+  var classes = req.params['CLASSES'];
+
+  res.json({school: schoolSlug, sem: semSlug, classes: classes});
+})
 
 module.exports = router;
