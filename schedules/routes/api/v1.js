@@ -51,7 +51,15 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:CLASSES', function(req, res, next) {
   var semSlug = req.params['SEMSLUG'];
   var classes = req.params['CLASSES'];
 
-  res.json({school: schoolSlug, sem: semSlug, classes: classes});
+  // Generate blank calendar
+  cal = ical({domain: 'schedules.gmu.edu', name: 'SRCT Schedules Generated Calendar'});
+
+  res.set({
+    'Content-Type': 'text/calendar; charset=utf-8',
+    'Content-Disposition': 'attachment; filename="' + ('calendar.ics') + '"'
+  });
+
+  res.send(cal.toString());;
 })
 
 module.exports = router;
