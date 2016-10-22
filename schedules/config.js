@@ -11,10 +11,6 @@ config.siteName = "Schedules";
 // Application Description (subtitle)
 config.siteDescription = "A simple application to add your class schedule to calendar applications like Outlook and Google Calendar."
 
-// MongoDB config
-config.mongoDBURL = 'mongodb://localhost/schedules';
-config.ReloadDB = false;
-
 // Object given to the front end to populate the semester and school selection
 //   dropdown lists.
 // TODO: Make this dynamic instead of hard coding it into the system.

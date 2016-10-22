@@ -12,8 +12,6 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var mongooseRedisCache = require("mongoose-redis-cache");
 
 // Load site wide configurations
 var config = require('./config');
@@ -43,14 +41,10 @@ app.use(require('node-sass-middleware')({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Connect to mongo
-mongoose.connect(config.mongoDBURL);
-// Setup the mongo redis caching for performance
-mongooseRedisCache(mongoose);
-
 // Populate initial data
-var populateDB = require('./setup/populateDB');
-populateDB();
+// TODO: convert these over to the MYSQL Section
+//var populateDB = require('./setup/populateDB');
+//populateDB();
 
 // Actually use the loaded routes
 // TODO: make this automatic instead of being manually entered
