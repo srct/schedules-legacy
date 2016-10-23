@@ -11,6 +11,19 @@ config.siteName = "Schedules";
 // Application Description (subtitle)
 config.siteDescription = "A simple application to add your class schedule to calendar applications like Outlook and Google Calendar."
 
+config.databaseInformation = {
+    'databaseName' : 'schedules',
+    'databaseUser' : 'schedules',
+    'databasePass' : 'srct',
+    'host'         : 'localhost',
+    'dialect'      : 'mysql',
+    'pool'         : {
+        'max'  : 5,
+        'min'  : 0,
+        'idle' : 10000
+    }
+}
+
 // Object given to the front end to populate the semester and school selection
 //   dropdown lists.
 // TODO: Make this dynamic instead of hard coding it into the system.
