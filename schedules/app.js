@@ -41,6 +41,15 @@ app.use(require('node-sass-middleware')({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Configure and Initialize Database Connection
+var sequelize = new Sequelize(
+    config.databaseName,
+    config.databaseUser,
+    config.databasePass,
+    config.pool
+);
+
+
 // Populate initial data
 // TODO: convert these over to the MYSQL Section
 //var populateDB = require('./setup/populateDB');
