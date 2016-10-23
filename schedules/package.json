@@ -12,8 +12,10 @@
     "express": "~4.13.4",
     "ical-generator": "^0.2.8",
     "morgan": "~1.7.0",
+    "mysql": "^2.11.1",
     "node-sass": "^3.8.0",
     "node-sass-middleware": "0.8.0",
-    "pug": "^2.0.0-beta6"
+    "pug": "^2.0.0-beta6",
+    "sequelize": "^3.24.5"
   }
 }
