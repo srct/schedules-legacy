@@ -22,16 +22,16 @@ if [ "$DISTRIB_ID" == "Ubuntu" ]
       then
         echo "** Installing Node.js"
         curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-        sudo apt-get install -y nodejs
+        sudo apt-get install -y nodejs npm
     fi
-    if ! haveProg redis-server
-      then
-        echo "** Installing redis-server"
-        sudo apt-get install -y redis-server
-        sudo mv /etc/redis/redis.conf /etc/redis/redis.conf.backup
-        sudo cp setupFiles/redis.conf /etc/redis/redis.conf
-        echo "** redis-server installed and configured"
-    fi
+    #if ! haveProg redis-server
+    #  then
+    #    echo "** Installing redis-server"
+    #    sudo apt-get install -y redis-server
+    #    sudo mv /etc/redis/redis.conf /etc/redis/redis.conf.backup
+    #    sudo cp setupFiles/redis.conf /etc/redis/redis.conf
+    #    echo "** redis-server installed and configured"
+    #fi
 elif haveProg yum
   then
     echo "** Installing as yum manager"
