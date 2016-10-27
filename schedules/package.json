@@ -16,6 +16,12 @@
     "node-sass": "^3.8.0",
     "node-sass-middleware": "0.8.0",
     "pug": "^2.0.0-beta6",
-    "sequelize": "^3.24.5"
+    "sequelize": "^3.24.6"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
+    "mockery": "^1.7.0",
+    "sinon": "^1.17.6"
   }
 }
