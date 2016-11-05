@@ -14,8 +14,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
 
-// Load site wide configurations
-var config = require('./config');
+// Load site wide configurations as well as the environment
+// TODO: make the actual file an actual json file
+var env = process.env.NODE_ENV || "development";
+var config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
 
 // Load in Routes
 // TODO: Make this a dynamic loading system that simply scans the directory
@@ -34,6 +36,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(require('node-sass-middleware')({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),

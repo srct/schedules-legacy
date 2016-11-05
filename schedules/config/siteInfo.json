@@ -1,0 +1,11 @@
+{
+    "name" : "Schedules",
+    "description" : "A simple application to add your class schedules to calendar applications.",
+
+    "organization" : {
+        "name" : "Mason SRCT",
+        "description": "Student Run Computing and Technology",
+        "website" : "srct.gmu.edu",
+        "websiteURL" : "https://srct.gmu.edu"
+    }
+}
