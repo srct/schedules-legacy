@@ -13,11 +13,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
-
-// Load site wide configurations as well as the environment
-// TODO: make the actual file an actual json file
-var env = process.env.NODE_ENV || "development";
-var config = require('./config/index');
+var config = require('config');
 
 // Load in Routes
 // TODO: Make this a dynamic loading system that simply scans the directory
@@ -45,19 +41,11 @@ app.use(require('node-sass-middleware')({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configure and Initialize Database Connection
-var sequelize = new Sequelize(
-    config.databaseName,
-    config.databaseUser,
-    config.databasePass,
-    config.pool
-);
-
+// Initialize the Database and Connection
+var db = require(path.join(__dirname, 'models', 'index'));
 
 // Populate initial data
-// TODO: convert these over to the MYSQL Section
-//var populateDB = require('./setup/populateDB');
-//populateDB();
+// TODO: populate the information
 
 // Actually use the loaded routes
 // TODO: make this automatic instead of being manually entered
