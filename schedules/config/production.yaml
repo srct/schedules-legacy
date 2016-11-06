@@ -1,0 +1,18 @@
+# General Application Settings
+
+
+
+# Sequelize Settings (Database)
+
+sequelize :
+    dialect  : "mysql"
+    host     : "localhost"
+    database : "schedules"
+    username : "schedules"
+    password : "srct"
+    pool :
+        max  : 5
+        min  : 0
+        idle : 10000
+
+# Data Sources etc
