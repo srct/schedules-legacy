@@ -4,21 +4,22 @@
 //   data source for the application sent on the front end.
 ////////////////////////////////////////////////////////////////////////////////
 
-var express = require('express');
-var router = express.Router();
+var express  = require('express');
+var router   = express.Router();
 var mongoose = require('mongoose');
 var Semester = require('../../models/Semester');
-var ical = require('ical-generator');
+var ical     = require('ical-generator');
+var config   = require('config');
 
 // Load site wide configurations
-var config = require('../../config');
+var schoolSlugs = config.get('schoolSlugs');
 
 ////////////////////////////////////////////////////////////////////////////////
 // JSON API Section
 
 // Get school and semester slug listing
 router.get('/json/schools', function(req, res, next) {
-  res.json(config.schoolSlugs);
+  res.json(schoolSlugs);
 });
 
 // GET classes for a semester

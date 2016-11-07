@@ -8,9 +8,9 @@ module.exports = function(sequelize, DataTypes) {
         name: DataTypes.STRING,
 
         universitySlug: {
-            type: DataTypes
+            type: DataTypes.STRING,
             references: {
-                model: University
+                model: University,
                 key: slug
             }
         }

@@ -41,3 +41,6 @@ schools :
             longName : "Spring 2017"
             dataFile : "GMU2017SP.min.json"
 
+schoolSlugs :
+    - "GMU"
+    - "VT"

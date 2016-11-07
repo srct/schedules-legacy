@@ -4,7 +4,7 @@ var Semester = require('../models/Semester');
 var fs = require("fs");
 
 // Load site wide configurations
-var config = require('../config');
+//var config = require('../config');
 
 var populateDB = function() {
   if (config.ReloadDB) {

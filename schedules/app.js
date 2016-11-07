@@ -13,7 +13,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
-var config = require('config');
+//var config = require('config');
 
 // Load in Routes
 // TODO: Make this a dynamic loading system that simply scans the directory
@@ -42,7 +42,7 @@ app.use(require('node-sass-middleware')({
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Initialize the Database and Connection
-var db = require(path.join(__dirname, 'models', 'index'));
+app.set('db', path.join(__dirname, 'models', 'index'));
 
 // Populate initial data
 // TODO: populate the information

@@ -6,13 +6,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 var express = require('express');
 var router = express.Router();
+var config = require('config');
 
 // Load site wide configurations
-var config = require('../config');
+var siteInfo = config.get('general');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { config });
+  res.render('index', { siteInfo });
 })
 
 module.exports = router;
