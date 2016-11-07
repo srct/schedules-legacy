@@ -13,16 +13,16 @@ var sequelize = new Sequelize(sequelizeConf);
 // empty variable to load entire database into
 var db = {};
 
+var modelNames = [
+    'Section',
+    'Semester',
+    'University'
+]
 // this section load every model file in the `models` dir into the database
-fs
-    .readdirSync(__dirname)
-    .flter(function(file) {
-        return (file.indexOf("." !== 0)) && (file !== "index.js");
-    })
-    .forEach(function(file) {
-        var model = sequelize.import(path.join(__dirname, file));
-        db[model.name] = model;
-    });
+modelNames.forEach(function(modelName) {
+    var model = sequelize.import(path.join(__dirname, modelName));
+    db[model.name] = model;
+});
 
 // TODO: figure out exactly what this is doing
 Object.keys(db).forEach(function(modelName) {

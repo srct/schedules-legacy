@@ -6,9 +6,9 @@
 
 var express  = require('express');
 var router   = express.Router();
-var mongoose = require('mongoose');
 var Semester = require('../../models/Semester');
 var ical     = require('ical-generator');
+var db = require('models');
 var config   = require('config');
 
 // Load site wide configurations
@@ -26,23 +26,17 @@ router.get('/json/schools', function(req, res, next) {
 router.get('/json/classes/:SEMSLUG', function(req, res, next) {
   var slug = req.params['SEMSLUG'];
   // find each person with matching slug
-  var query = Semester.findOne({ 'slug': slug });
+
   // remove unwanted fields from request
-  query.select('-_id -classes._id -classes.session_templates._id');
+
   // excecute the request (caches with redis)
-  query.lean().exec(function (err, semester) {
+
     // if there was an error or nothing was returned
-    if (err || (! semester)) {
+
       // send an error message
-      res.json({
-         'results' : 'error, try something different'
-      })
-    }
+
     // else send out the semester object as json
-    else {
-      res.json(semester);
-    }
-  })
+
 });
 
 ////////////////////////////////////////////////////////////////////////////////

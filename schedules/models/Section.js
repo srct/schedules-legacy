@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Section = sequelize.define("Section", {
+    return sequelize.define("Section", {
         // unique index/key
         crn        : {
             type: DataTypes.STRING,
@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
         title      : DataTypes.STRING,
         section    : DataTypes.STRING,
 
-        instructor : type: DataTypes.STRING,
+        instructor : DataTypes.STRING,
 
         campus     : DataTypes.STRING,
         location   : DataTypes.STRING,
@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
         endDate    : DataTypes.DATE,
 
         Msession   : {
-            type: DataTypes.BOOL,
+            type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
         },
@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
         MtimeEnd   : DataTypes.TIME,
 
         Tsession   : {
-            type: DataTypes.BOOL,
+            type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
         },
@@ -38,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
         TtimeEnd   : DataTypes.TIME,
 
         Wsession   : {
-            type: DataTypes.BOOL,
+            type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
         },
@@ -46,7 +46,7 @@ module.exports = function(sequelize, DataTypes) {
         WtimeEnd   : DataTypes.TIME,
 
         Rsession   : {
-            type: DataTypes.BOOL,
+            type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
         },
@@ -54,7 +54,7 @@ module.exports = function(sequelize, DataTypes) {
         RtimeEnd   : DataTypes.TIME,
 
         Fsession   : {
-            type: DataTypes.BOOL,
+            type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
         },
@@ -62,41 +62,41 @@ module.exports = function(sequelize, DataTypes) {
         FtimeEnd   : DataTypes.TIME
     }, {
         validate: {
-            Msession: function(value) {
-                if (Msession === true) &&
-                    (MtimeStart === null || MtimeEnd === null) {
+            Msession_validate: function(value) {
+                if ((Msession === true) &&
+                    (MtimeStart === null || MtimeEnd === null)) {
                     throw new Error('Start and end times must be defined for' +
                         ' Monday if class is set to true.');
                 }
             },
 
-            Tsession: function(value) {
-                if (Tsession === true) &&
-                    (TtimeStart === null || TtimeEnd === null) {
+            Tsession_validate: function(value) {
+                if ((Tsession === true) &&
+                    (TtimeStart === null || TtimeEnd === null)) {
                     throw new Error('Start and end times must be defined for' +
                         ' Tuesday if class is set to true.');
                 }
             },
 
-            Wsession: function(value) {
-                if (Wsession === true) &&
-                    (WtimeStart === null || WtimeEnd === null) {
+            Wsession_validate: function(value) {
+                if ((Wsession === true) &&
+                    (WtimeStart === null || WtimeEnd === null)) {
                     throw new Error('Start and end times must be defined for' +
                         ' Wednesday if class is set to true.');
                 }
             },
 
-            Rsession: function(value) {
-                if (Rsession === true) &&
-                    (RtimeStart === null || RtimeEnd === null) {
+            Rsession_validate: function(value) {
+                if ((Rsession === true) &&
+                    (RtimeStart === null || RtimeEnd === null)) {
                     throw new Error('Start and end times must be defined for' +
                         ' Thursday if class is set to true.');
                 }
             },
 
-            Fsession: function(value) {
-                if (Fsession === true) &&
-                    (FtimeStart === null || FtimeEnd === null) {
+            Fsession_validate: function(value) {
+                if ((Fsession === true) &&
+                    (FtimeStart === null || FtimeEnd === null)) {
                     throw new Error('Start and end times must be defined for' +
                         ' Friday if class is set to true.');
                 }

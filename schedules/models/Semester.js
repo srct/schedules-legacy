@@ -8,12 +8,20 @@ module.exports = function(sequelize, DataTypes) {
         name: DataTypes.STRING,
 
         universitySlug: {
-            type: DataTypes.STRING,
-            references: {
-                model: University,
-                key: slug
+            type: DataTypes.STRING
+            //references: {
+            //    model: University,
+            //    key: slug
+            //}
+        }
+    }, {
+        classMethods: {
+            associate: function(models) {
+                Semester.belongsTo(models.University, { foreignKey: 'slug' } );
             }
         }
-    })
+    });
+
+    return Semester;
 }
 
