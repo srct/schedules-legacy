@@ -31,4 +31,4 @@ npm-debug.log
 
 # databases
 
-.sqlite
+*.sqlite
