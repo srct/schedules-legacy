@@ -33,9 +33,10 @@
   },
   "standard": {
       "ignore": [
-        "/public/javascripts/bootstrap.js",
+        "/public/javascripts/bootstrap*.js",
         "/public/javascripts/bootstrap/",
-        "/public/javascripts/fontawesome.js"
+        "/public/javascripts/fontawesome.js",
+        "/dataScrapers/"
       ]
   }
 }
