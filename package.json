@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "./bin/lint"
+    "lint": "standard --verbose | snazzy",
+    "precommit": "npm run lint"
   },
   "dependencies": {
     "app-module-path": "^2.1.0",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "husky": "^0.11.9",
     "mocha": "^3.0.2",
     "mockery": "^1.7.0",
     "sinon": "^1.17.6",
@@ -32,11 +34,11 @@
     "standard": "^8.5.0"
   },
   "standard": {
-      "ignore": [
-        "/public/javascripts/bootstrap*.js",
-        "/public/javascripts/bootstrap/",
-        "/public/javascripts/fontawesome.js",
-        "/dataScrapers/"
-      ]
+    "ignore": [
+      "/public/javascripts/bootstrap*.js",
+      "/public/javascripts/bootstrap/",
+      "/public/javascripts/fontawesome.js",
+      "/dataScrapers/"
+    ]
   }
 }
