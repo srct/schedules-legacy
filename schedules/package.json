@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "./bin/lint"
   },
   "dependencies": {
     "app-module-path": "^2.1.0",
@@ -26,6 +27,15 @@
     "chai": "^3.5.0",
     "mocha": "^3.0.2",
     "mockery": "^1.7.0",
-    "sinon": "^1.17.6"
+    "sinon": "^1.17.6",
+    "snazzy": "^5.0.0",
+    "standard": "^8.5.0"
+  },
+  "standard": {
+      "ignore": [
+        "/public/javascripts/bootstrap.js",
+        "/public/javascripts/bootstrap/",
+        "/public/javascripts/fontawesome.js"
+      ]
   }
 }

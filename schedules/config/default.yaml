@@ -17,7 +17,7 @@ general :
 
 sequelize :
     dialect : "sqlite"
-    storage : "./db.development/.sqlite"
+    storage : "./.devDB/schedules.sqlite"
 
 # Data Sources etc
 
