@@ -1,0 +1,11 @@
+# General Application Settings
+
+
+
+# Sequelize Settings (Database)
+
+sequelize :
+    dialect : "sqlite"
+    storage : ":memory:"
+
+# Data Sources etc

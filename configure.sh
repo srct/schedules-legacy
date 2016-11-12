@@ -22,25 +22,16 @@ if [ "$DISTRIB_ID" == "Ubuntu" ]
       then
         echo "** Installing Node.js"
         curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-        sudo apt-get install -y nodejs
+        sudo apt-get install -y nodejs npm
     fi
-    if ! haveProg mongod
-      then
-        echo "** Installing MongoDB"
-        sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-        echo "deb http://repo.mongodb.org/apt/ubuntu $DISTRIB_CODENAME/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-        sudo apt-get update
-        sudo apt-get install -y mongodb-org
-        ## Service is started in start.sh file
-    fi
-    if ! haveProg redis-server
-      then
-        echo "** Installing redis-server"
-        sudo apt-get install -y redis-server
-        sudo mv /etc/redis/redis.conf /etc/redis/redis.conf.backup
-        sudo cp setupFiles/redis.conf /etc/redis/redis.conf
-        echo "** redis-server installed and configured"
-    fi
+    #if ! haveProg redis-server
+    #  then
+    #    echo "** Installing redis-server"
+    #    sudo apt-get install -y redis-server
+    #    sudo mv /etc/redis/redis.conf /etc/redis/redis.conf.backup
+    #    sudo cp setupFiles/redis.conf /etc/redis/redis.conf
+    #    echo "** redis-server installed and configured"
+    #fi
 elif haveProg yum
   then
     echo "** Installing as yum manager"
