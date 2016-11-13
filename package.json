@@ -1,11 +1,23 @@
 {
   "name": "schedules",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
+  "description": "Web application to fetch classes over WebDAV",
+  "author": "Student Run Computing and Technology <srct@gmu.edu>",
+  "contributors": [{
+      "name": "Mark Stenglein (ocelotsloth)",
+      "email": "mark@stengle.in"
+  }],
   "scripts": {
     "start": "node ./bin/www",
     "lint": "standard --verbose | snazzy",
     "precommit": "npm run lint"
+  },
+  "repository": {
+      "type": "git",
+      "url": "https://git.gmu.edu/srct/schedules"
+  },
+  "bugs": {
+      "url": "https://git.gmu.edu/srct/schedules/issues"
   },
   "dependencies": {
     "app-module-path": "^2.1.0",
@@ -40,5 +52,6 @@
       "/public/javascripts/fontawesome.js",
       "/dataScrapers/"
     ]
-  }
+  },
+  "license": "MIT"
 }
