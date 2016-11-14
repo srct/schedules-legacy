@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha --reporter tap",
+    "test": "mocha",
     "precommit": "mocha"
   },
   "repository": {
