@@ -9,6 +9,6 @@ test_Schedules:
         - apt-get update -qy
         - apt-get install sqlite3
         - npm config set loglevel warn
-        - npm install
+        - npm install --quiet
     script:
         - npm test
