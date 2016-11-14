@@ -1,5 +1,0 @@
-#!/bin/bash
-
-NPMBIN="$(npm bin)"
-
-$NPMBIN/standard --verbose | $NPMBIN/snazzy
