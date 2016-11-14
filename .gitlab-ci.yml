@@ -6,8 +6,8 @@ types:
 test_Schedules:
     type: test
     before_script:
-        - sudo apt-get update -qy
-        - sudo apt-get install sqlite3
+        - apt-get update -qy
+        - apt-get install sqlite3
         - npm install
     script:
         - npm test
