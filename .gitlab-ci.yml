@@ -8,6 +8,7 @@ test_Schedules:
     before_script:
         - apt-get update -qy
         - apt-get install sqlite3
+        - npm config set loglevel warn
         - npm install
     script:
         - npm test
