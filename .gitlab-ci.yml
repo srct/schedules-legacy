@@ -6,8 +6,8 @@ types:
 test_Schedules:
     type: test
     before_script:
-        - apt-get update -qy -o=Dpkg::Use-Pty=0
+        - apt-get update -qy
         - apt-get install -qq -o=Dpkg::Use-Pty=0 sqlite3
-        - npm install --silent
+        - npm install --loglevel silent
     script:
         - npm test
