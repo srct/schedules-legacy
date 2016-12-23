@@ -40,10 +40,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // Initialize the Database and Connection
 var db = require(path.join(__dirname, 'models'))
-db.sequelize.sync({force: true})
 
 // Populate initial data
-// TODO: populate the information
+require(path.join(__dirname, 'data'))
 
 // Actually use the loaded routes
 // TODO: make this automatic instead of being manually entered

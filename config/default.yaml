@@ -23,7 +23,8 @@ sequelize :
 
 schools :
     - slug      : GMU
-      longName  : George Mason University
+      name      : George Mason University
+      website   : www2.gmu.edu
       semesters :
           - slug     : "GMU2016SP"
             longName : "Spring 2016"

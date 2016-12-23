@@ -16,9 +16,15 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     }
   }, {
+    idexes: [
+      {
+        unique: true,
+        fields: ['slug']
+      }
+    ],
     classMethods: {
       associate: function (models) {
-        University.hasMany(models.Semester, { foreignKey: 'slug' })
+        models.University.hasMany(models.Semester)
       }
     }
   })

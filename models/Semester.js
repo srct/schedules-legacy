@@ -5,19 +5,18 @@ module.exports = function (sequelize, DataTypes) {
       unique: true
     },
 
-    name: DataTypes.STRING,
+    name: DataTypes.STRING
 
-    universitySlug: {
-      type: DataTypes.STRING
-            // references: {
-            //    model: University,
-            //    key: slug
-            // }
-    }
   }, {
-    classMethods: {
+    indexes: [
+      {
+        unique: true,
+        fields: ['slug']
+      }
+    ], classMethods: {
       associate: function (models) {
-        Semester.belongsTo(models.University, { foreignKey: 'slug' })
+        models.Semester.belongsTo(models.University)
+        models.Semester.hasMany(models.Section)
       }
     }
   })

@@ -23,9 +23,10 @@ modelNames.forEach(function (modelName) {
   db[model.name] = model
 })
 
-// TODO: figure out exactly what this is doing
 Object.keys(db).forEach(function (modelName) {
+  console.log(modelName)
   if ('associate' in db[modelName]) {
+    console.log('yep, it ran for this one')
     db[modelName].associate(db)
   }
 })

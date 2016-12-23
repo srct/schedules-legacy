@@ -12,11 +12,12 @@ module.exports = function (sequelize, DataTypes) {
 
     instructor: DataTypes.STRING,
 
+
     class_type: DataTypes.STRING,
 
         // Start Time Information
-    startDate: DataTypes.STRING,
-    endDate: DataTypes.STRING,
+    startDate: DataTypes.DATE,
+    endDate: DataTypes.DATE,
 
     /*
      * NOTE: `campus` and `location` are stored overall as well as for each
@@ -32,8 +33,8 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     },
-    MtimeStart: DataTypes.STRING,
-    MtimeEnd: DataTypes.STRING,
+    MtimeStart: DataTypes.TIME,
+    MtimeEnd: DataTypes.TIME,
     MclassType: DataTypes.STRING,
     Mlocation: DataTypes.STRING,
 
@@ -42,8 +43,8 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     },
-    TtimeStart: DataTypes.STRING,
-    TtimeEnd: DataTypes.STRING,
+    TtimeStart: DataTypes.TIME,
+    TtimeEnd: DataTypes.TIME,
     Tcampus: DataTypes.STRING,
     TclassType: DataTypes.STRING,
 
@@ -52,8 +53,8 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     },
-    WtimeStart: DataTypes.STRING,
-    WtimeEnd: DataTypes.STRING,
+    WtimeStart: DataTypes.TIME,
+    WtimeEnd: DataTypes.TIME,
     WclassType: DataTypes.STRING,
     Wlocation: DataTypes.STRING,
 
@@ -62,8 +63,8 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     },
-    RtimeStart: DataTypes.STRING,
-    RtimeEnd: DataTypes.STRING,
+    RtimeStart: DataTypes.TIME,
+    RtimeEnd: DataTypes.TIME,
     RclassType: DataTypes.STRING,
     Rlocation: DataTypes.STRING,
 
@@ -72,10 +73,10 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     },
-    FtimeStart: DataTypes.STRING,
-    FtimeEnd: DataTypes.STRING,
+    FtimeStart: DataTypes.TIME,
+    FtimeEnd: DataTypes.TIME
     FclassType: DataTypes.STRING,
-    Flocation: DataTypes.STRING
+    Flocation: DataTypes.STRING,
   }, {
     validate: {
       Msession_validate: function (value) {
@@ -117,7 +118,8 @@ module.exports = function (sequelize, DataTypes) {
                         ' Friday if class is set to true.')
         }
       }
-    },
+    }
+  }, {
     indexes: [
       {
         unique: true,
@@ -143,7 +145,8 @@ module.exports = function (sequelize, DataTypes) {
         unique: false,
         fields: ['title']
       }
-    ],
+    ]
+  }, {
     classMethods: {
       associate: function (models) {
         models.Section.belongsTo(models.Semester)
