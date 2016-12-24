@@ -88,6 +88,7 @@ var syncSections = function(semester) {
       'name': rawSection.name,
       'title': rawSection.title,
       'section': rawSection.section,
+      'semester': semester.slug,
       'instructors': '', // build this from all total instructors
       'campus': rawSection.campus,
       'location': '', // taken from only the first session_template
