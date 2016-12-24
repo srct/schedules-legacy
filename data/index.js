@@ -78,6 +78,7 @@ var syncSections = function(semester) {
   // Fetch the large JSON object file that stores all of the `Section` data for
   // this particular semester.
   var rawSections = require(path.join(__dirname, 'dataFiles', semester.dataFile))
+  var finalSections = []
 
   for (var z = 0; z < rawSections.classes.length; z++) {
     var rawSection = rawSections.classes[z]
@@ -88,7 +89,7 @@ var syncSections = function(semester) {
       'name': rawSection.name,
       'title': rawSection.title,
       'section': rawSection.section,
-      'semester': semester.slug,
+      'semester': semester.slug, // this is the field setting the relationship
       'instructors': '', // build this from all total instructors
       'campus': rawSection.campus,
       'location': '', // taken from only the first session_template
@@ -177,13 +178,15 @@ var syncSections = function(semester) {
       })
     }
     /* END JANKY WORKAROUND DESCRIBED IN ABOVE BLOCK */
-    models.Section.create(section)
+    finalSections.push(section)
+    //models.Section.create(section).catch(function (err) { console.log(err) })
   }
+  models.Section.bulkCreate(finalSections).catch(function (err) {console.log(err)})
 }
 
 // Synchronize the database tables with their models (leave `{force: true}` to
 // empty the database at each run)
 // TODO: create a config switch that decides locally if the database is to be
 //       completely wiped each and every run of the application or not.
-sequelize.sync({ force: true, logging: console.log }).then(syncUniversities)
+sequelize.sync({ force: true }).then(syncUniversities)
 
