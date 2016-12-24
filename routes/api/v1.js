@@ -13,34 +13,55 @@ var express = require('express')
 var router = express.Router()
 // var Semester = require('../../models/Semester')
 var ical = require('ical-generator')
-// var db = require('models')
 var config = require('config')
 
 // Load site wide configurations
 var schoolSlugs = config.get('schoolSlugs')
 
+var db = require('models')
 // ////////////////////////////////////////////////////////////////////////////
-// JSON API Section
-
-// Get school and semester slug listing
+// JSON API Section Get school and semester slug listing
 router.get('/json/schools', function (req, res, next) {
-  res.json(schoolSlugs)
+  db.University.findAll({
+    attributes: ['slug', 'name', 'website']
+  }).then(function (query) {
+    var schools
+    res.json(query)
+  })
+})
+
+// GET semester slug listing for school
+router.get('/json/semesters/:SCHOOLSLUG', function (req, res, next) {
+  db.Semester.findAll({
+    attributes: ['slug', 'name'],
+    where: {
+      university: req.params['SCHOOLSLUG']
+    }
+  }).then(function (query) {
+    res.json(query)
+  })
 })
 
 // GET classes for a semester
 router.get('/json/classes/:SEMSLUG', function (req, res, next) {
-  // var slug = req.params['SEMSLUG']
-  // find each person with matching slug
+  db.Section.findAll({
+    where: {
+      semester: req.params['SEMSLUG']
+    }
+  }).then(function (query) {
+    res.json(query)
+  })
+})
 
-  // remove unwanted fields from request
-
-  // excecute the request (caches with redis)
-
-    // if there was an error or nothing was returned
-
-      // send an error message
-
-    // else send out the semester object as json
+// GET Class information for one course by CRN
+router.get('/json/classes/crn/:CRN', function (req, res, next) {
+  db.Section.findAll({
+    where: {
+      crn: req.params['CRN']
+    }
+  }).then(function (query) {
+    res.json(query)
+  })
 })
 
 // ////////////////////////////////////////////////////////////////////////////
