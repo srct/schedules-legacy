@@ -3,8 +3,6 @@ module.exports = function (sequelize, DataTypes) {
         // unique index/key
     crn: {
       type: DataTypes.STRING,
-      unique: true,
-      primaryKey: true
     },
 
     semester: {
@@ -89,7 +87,7 @@ module.exports = function (sequelize, DataTypes) {
     indexes: [
       {
         unique: true,
-        fields: ['crn']
+        fields: ['crn', 'semester']
       },
 
       {
