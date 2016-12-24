@@ -25,7 +25,7 @@ module.exports = function (sequelize, DataTypes) {
     ],
     classMethods: {
       associate: function (models) {
-        models.University.hasMany(models.Semester)
+        models.University.hasMany(models.Semester, {foreignKey: 'university'})
       }
     }
   })

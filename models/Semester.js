@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
     university: {
       type: DataTypes.STRING,
       references: {
-        model: 'University',
+        model: 'Universities',
         key  : 'slug'
       }
     },
@@ -24,8 +24,8 @@ module.exports = function (sequelize, DataTypes) {
       }
     ], classMethods: {
       associate: function (models) {
-        models.Semester.belongsTo(models.University)
-        models.Semester.hasMany(models.Section)
+        models.Semester.belongsTo(models.University, {foreignKey: 'university'})
+        models.Semester.hasMany(models.Section, {foreignKey: 'semester'})
       }
     }
   })

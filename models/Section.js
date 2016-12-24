@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
     semester: {
       type: DataTypes.STRING,
       references: {
-        model: 'Semester',
+        model: 'Semesters',
         key  : 'slug'
       }
     },
@@ -86,47 +86,6 @@ module.exports = function (sequelize, DataTypes) {
     FclassType: DataTypes.STRING,
     Flocation: DataTypes.STRING
   }, {
-    validate: {
-      Msession_validate: function (value) {
-        if ((this.Msession === true) &&
-                    (this.MtimeStart === null || this.MtimeEnd === null)) {
-          throw new Error('Start and end times must be defined for' +
-                        ' Monday if class is set to true.')
-        }
-      },
-
-      Tsession_validate: function (value) {
-        if ((this.Tsession === true) &&
-                    (this.TtimeStart === null || this.TtimeEnd === null)) {
-          throw new Error('Start and end times must be defined for' +
-                        ' Tuesday if class is set to true.')
-        }
-      },
-
-      Wsession_validate: function (value) {
-        if ((this.Wsession === true) &&
-                    (this.WtimeStart === null || this.WtimeEnd === null)) {
-          throw new Error('Start and end times must be defined for' +
-                        ' Wednesday if class is set to true.')
-        }
-      },
-
-      Rsession_validate: function (value) {
-        if ((this.Rsession === true) &&
-                    (this.RtimeStart === null || this.RtimeEnd === null)) {
-          throw new Error('Start and end times must be defined for' +
-                        ' Thursday if class is set to true.')
-        }
-      },
-
-      Fsession_validate: function (value) {
-        if ((this.Fsession === true) &&
-                    (this.FtimeStart === null || this.FtimeEnd === null)) {
-          throw new Error('Start and end times must be defined for' +
-                        ' Friday if class is set to true.')
-        }
-      }
-    },
     indexes: [
       {
         unique: true,
@@ -155,7 +114,7 @@ module.exports = function (sequelize, DataTypes) {
     ],
     classMethods: {
       associate: function (models) {
-        models.Section.belongsTo(models.Semester)
+        models.Section.belongsTo(models.Semester, {foreignKey: 'semester'})
       }
     }
   })
