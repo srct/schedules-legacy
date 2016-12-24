@@ -1,8 +1,10 @@
-//              Mason SRCT: Schedules Application Main File
-// - This is the main file for the schedules app, which loads in all of the
-//   configuration and routing files. Essentially, any other file eventually
-//   leads here.
-// - Take care with this file, it can hurt if you mess it up.
+/*
+ *              Mason SRCT: Schedules Application Main File
+ * - This is the main file for the schedules app, which loads in all of the
+ *   configuration and routing files. Essentially, any other file eventually
+ *   leads here.
+ * - Take care with this file, it can hurt if you mess it up.
+ */
 
 // Load in the different packages
 require('app-module-path').addPath(__dirname)

@@ -1,8 +1,13 @@
-// ////////////////////////////////////////////////////////////////////////////
-//                         Mason SRCT: Schedules API v1
-// - This API supports the Schedules project at schedules.gmu.edu as the backend
-//   data source for the application sent on the front end.
-// ////////////////////////////////////////////////////////////////////////////
+/*
+ * Schedules by Student Run Computing and Technology
+ *
+ * routes/api/v1.js
+ *
+ * This API supports the Schedules project at schedules.gmu.edu as the backend
+ * data source for the application as well as any other third party apps.
+ *
+ * iCal Generation is handled on a separate file.
+ */
 
 var express = require('express')
 var router = express.Router()
