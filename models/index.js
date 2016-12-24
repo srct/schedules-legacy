@@ -5,6 +5,7 @@ var config = require('config')
 // get configuration for sequelize
 //   worth noting that this changes depending on the environment
 var sequelizeConf = config.get('sequelize')
+sequelizeConf.logging = false;
 
 // make the new connection
 var sequelize = new Sequelize(sequelizeConf)
