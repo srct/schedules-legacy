@@ -16,6 +16,15 @@ general :
 # Sequelize Settings (Database)
 
 sequelize :
+#    dialect  : "mysql"
+#    host     : "localhost"
+#    database : "schedules"
+#    username : "schedules"
+#    password : "password"
+#    pool :
+#        max  : 5
+#        min  : 0
+#        idle : 10000
     dialect : "sqlite"
     storage : "./.devDB/schedules.sqlite"
 
