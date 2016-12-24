@@ -3,7 +3,8 @@ module.exports = function (sequelize, DataTypes) {
     slug: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      primaryKey: true
     },
 
     name: {

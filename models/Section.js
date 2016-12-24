@@ -3,7 +3,16 @@ module.exports = function (sequelize, DataTypes) {
         // unique index/key
     crn: {
       type: DataTypes.STRING,
-      unique: true
+      unique: true,
+      primaryKey: true
+    },
+
+    semester: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'Semester',
+        key  : 'slug'
+      }
     },
 
     name: DataTypes.STRING,
