@@ -54,7 +54,7 @@
       "/public/javascripts/bootstrap*.js",
       "/public/javascripts/bootstrap/",
       "/public/javascripts/fontawesome.js",
-      "/dataScrapers/"
+      "/helpers/dataScrapers/"
     ]
   },
   "lint-staged": {

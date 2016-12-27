@@ -2,14 +2,14 @@ module.exports = function (sequelize, DataTypes) {
   return sequelize.define('Section', {
         // unique index/key
     crn: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
 
     semester: {
       type: DataTypes.STRING,
       references: {
         model: 'Semesters',
-        key  : 'slug'
+        key: 'slug'
       }
     },
 
