@@ -73,3 +73,62 @@ Contact the project manager or any of its developers if you'd like help picking 
 
 ### Credit where due:
 [Calendar](https://thenounproject.com/search/?q=calendar&i=431010) icon by Guilhem from [the Noun Project](https://thenounproject.com)
+
+## Project Structure
+
+The project has been setup in such a way as to try and not be confusing. Here
+is a brief overview of where everything is and what each section does.
+
+```plaintext
+schedules/
+  config/
+    default.yaml
+    production.yaml
+    local-*.yaml
+  data/
+    index.js
+    dataFiles/
+      *.min.json
+  helpers/
+    dataScrapers/
+      GMU/
+        archivedJSON/
+          *.json
+          *.min.json
+        archivedXLSX/
+          *.xlsx
+        classes.sh
+        extractClasses.js
+  models/
+    index.js
+    Section.js
+    Semester.js
+    University.js
+  public/
+    fonts/
+      bootstrap/
+    images/
+    javascripts/
+      bootstrap/
+      mainApp.js
+    stylesheets/
+      bootstrap/
+      main.css
+  routes/
+    api/
+      v1.js
+    docs.js
+    index.js
+  tests/
+    routes/
+    models/
+    integration/
+    ui/
+  views/
+    index.pug
+    *.pug
+  app.js
+  LICENSE
+  package.json
+  README.md
+```
