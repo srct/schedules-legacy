@@ -23,7 +23,6 @@ var schools = config.schools
 var sequelize = db.sequelize
 var models = db.sequelize.models
 
-
 /*
  * Loop through each school stored in the configuration and build the
  * university object for it. Once this is built, it is added to the database.
@@ -33,7 +32,7 @@ var models = db.sequelize.models
  * school at the same time. (yay promises!)
  *
  */
-var syncUniversities = function() {
+var syncUniversities = function () {
   schools.forEach(function (school) {
     var university = {
       'slug': school.slug,
@@ -55,7 +54,7 @@ var syncUniversities = function() {
  *
  * The function moves onto the next semester at the same time (yay promises!)
  */
-var syncSemesters = function(school) {
+var syncSemesters = function (school) {
   school.semesters.forEach(function (rawSemester) {
     var semester = {
       'slug': rawSemester.slug,
@@ -74,7 +73,7 @@ var syncSemesters = function(school) {
  * table. After the last section is loaded, all data will be finished being
  * added to the system.
  */
-var syncSections = function(semester) {
+var syncSections = function (semester) {
   // Fetch the large JSON object file that stores all of the `Section` data for
   // this particular semester.
   var rawSections = require(path.join(__dirname, 'dataFiles', semester.dataFile))
@@ -138,7 +137,7 @@ var syncSections = function(semester) {
       // raw value of the start/stop times (to be processed to time values)
       var sessionTime = session_template.time;
 
-      (['M', 'T', 'W', 'R', 'F']).forEach(function(day) {
+      (['M', 'T', 'W', 'R', 'F']).forEach(function (day) {
         if (session_template.days.indexOf(day) > -1) {
           // if here then there is a session for the day
           section[day + 'session'] = true
@@ -179,9 +178,9 @@ var syncSections = function(semester) {
     }
     /* END JANKY WORKAROUND DESCRIBED IN ABOVE BLOCK */
     finalSections.push(section)
-    //models.Section.create(section).catch(function (err) { console.log(err) })
+    // models.Section.create(section).catch(function (err) { console.log(err) })
   }
-  models.Section.bulkCreate(finalSections).catch(function (err) {console.log(err)})
+  models.Section.bulkCreate(finalSections).catch(function (err) { console.log(err) })
 }
 
 // Synchronize the database tables with their models (leave `{force: true}` to
