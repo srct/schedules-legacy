@@ -6,21 +6,31 @@
  * This API supports the Schedules project at schedules.gmu.edu as the backend
  * data source for the application as well as any other third party apps.
  *
- * iCal Generation is handled on a separate file.
+ * TODO: iCal Generation is handled on a separate file.
+ * TODO: shard this file into contents of a `v1` directory
  */
 
+// Load Environment
 var express = require('express')
 var router = express.Router()
-// var Semester = require('../../models/Semester')
-var ical = require('ical-generator')
-var config = require('config')
+var ical = require('ical-generator')        // ical-generator library
+var config = require('config')              // Site wide configs
+var schoolSlugs = config.get('schoolSlugs') // Configured School Slugs
+var db = require('models')                  // Database Object
 
-// Load site wide configurations
-var schoolSlugs = config.get('schoolSlugs')
+////////////////////////////////////////////////////////////////////////////////
+// JSON API Definitions
+// TODO: separate out into its own file
 
-var db = require('models')
-// ////////////////////////////////////////////////////////////////////////////
-// JSON API Section Get school and semester slug listing
+/*
+ * API Endpoint: __root/api/v1/json/schools
+ *   - Returns a list of all of the schools available to use the rest of this
+ *     API for.
+ *   - The intention here is for this to be used by the front end and any other
+ *     application to get a list of all the schools that the given deployment
+ *     actually has data for.
+ *   - TODO: Implement pagination of this API call in a non-breaking way
+ */
 router.get('/json/schools', function (req, res, next) {
   db.University.findAll({
     attributes: ['slug', 'name', 'website']
@@ -30,7 +40,12 @@ router.get('/json/schools', function (req, res, next) {
   })
 })
 
-// GET semester slug listing for school
+/*
+ * API Endpoint: __root/api/v1/json/semesters/{School Slug}
+ *   - For a given school (given as the slug found from '/json/schools', return
+ *     all of the semesters that belong to it.
+ *   - TODO: Implement pagination of this API call in a non-breaking way
+ */
 router.get('/json/semesters/:SCHOOLSLUG', function (req, res, next) {
   db.Semester.findAll({
     attributes: ['slug', 'name'],
@@ -42,7 +57,13 @@ router.get('/json/semesters/:SCHOOLSLUG', function (req, res, next) {
   })
 })
 
-// GET classes for a semester
+/*
+ * API Endpoint: __root/api/v1/classes/{Semester Slug}
+ *   - For a given semester (given as the slug returned from
+ *     `/json/semesters/:SCHOOLSLUG`), return all of the sections that belong to
+ *     it.
+ *   - TODO: Implement pagination of this API call in a non-breaking way
+ */
 router.get('/json/classes/:SEMSLUG', function (req, res, next) {
   db.Section.findAll({
     where: {
@@ -53,11 +74,21 @@ router.get('/json/classes/:SEMSLUG', function (req, res, next) {
   })
 })
 
-// GET Class information for one course by CRN
-router.get('/json/classes/crn/:CRN', function (req, res, next) {
+/*
+ * API Endpoint: __root/api/v1/classes/{Semester Slug}/{Course Number/ID}
+ *   - Retrieves an individual course record and sends it back to the user
+ *
+ * NOTE: Because unique CRN's are not guaranteed by all University's (like GMU),
+ *       we need to collect the semester and the CRN, which forms a combination
+ *       that is guaranteed to be unique.
+ *
+ * TODO: Implement this database call inside of the model itself to stay DRY
+ */
+router.get('/json/classes/:SEMESTER/:CRN', function (req, res, next) {
   db.Section.findAll({
     where: {
-      crn: req.params['CRN']
+      'crn'      : req.params['CRN'],
+      'semester' : req.params(['SEMESTER'])
     }
   }).then(function (query) {
     res.json(query)
@@ -66,6 +97,47 @@ router.get('/json/classes/crn/:CRN', function (req, res, next) {
 
 // ////////////////////////////////////////////////////////////////////////////
 // ICAL API Section
+// TODO: Separate out into it's own file
+
+/*
+ * API Endpoint: __root/api/v1/ical/{Semester Slug}/{Section CRN's}
+ *   - Takes a semester slug and a list of CRN's, builds a calendar object, and
+ *     sends an `.ics` file back to the requester.
+ *
+ * NOTES:
+ *   - Since this is an open source project targeted to students, I'm going to
+ *     explain this implementation a bit more in depth than would usually be
+ *     necessary.
+ *
+ *   - This route makes use of JavaScript Promises to avoid a callback pyramid.
+ *     The values `semester` and `sections` below are Asynchronous calls which
+ *     do not resolve immediately. If we were to build the calendar right after
+ *     that line it would result in an empty calendar. :cry:
+ *     - Later, at this part of the code, we wait for all the promises to
+ *       resolve before continuing execution by building the calendar:
+ *
+ *         Promise
+ *           .all(
+ *             [semester, sections]
+ *           ).then(function (queries) {
+ *             // ... execution continues here ...
+ *           }).catch(function (errors) {
+ *             // ... any errors handled here ...
+ *           })
+ *
+ *     - The important thing to keep in mind is that we can set a variable to
+ *       be equal to the _promise_ of a value that might take some time. This
+ *       tells JS that while there may not be anything here yet, there will be,
+ *       and provides useful methods to you that allow you to define callbacks
+ *       for different types of events with single or multiple promises.
+ *
+ *     - For more information on how JavaScript promises work, check out the
+ *       documentation at:
+ *         https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+ *       It's super helpful. Otherwise, ask me!
+ *
+ * TODO: Remove the school part of this query...no need because of Sem Slugs
+ */
 router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
 
   // Extract arguments and setup empty objects for them
@@ -109,15 +181,20 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
       }
     })
 
+  // TODO: look into separating this out into it's own helper file
   var makeCalendar = function(school, semester, sections) {
     // Generate blank calendar
     var cal = ical(
       {
-        domain: 'schedules.gmu.edu',
-        prodId: '//Student Run Computing and Technology//Schedules//EN',
-        name: school.get('slug') + ' Class Schedule Fall 2016'
+        'domain' : 'schedules.gmu.edu',
+        'prodId' : '//Student Run Computing and Technology//Schedules//EN',
+        'name'   : school.get('slug') + ' Class Schedule Fall 2016'
       }
     )
+
+    // Build the rest of the calendar
+
+      // TODO: build the calendar events
 
     return cal
   }
