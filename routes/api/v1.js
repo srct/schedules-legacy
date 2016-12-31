@@ -191,7 +191,7 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
         'name'   : school.get('slug') + ' Class Schedule Fall 2016'
       }
     )
-    cal.setTZ('America/New_York')
+    cal.setTZ(school.get('timezone'))
 
     // Build the rest of the calendar
     sections.forEach(function (section) {
@@ -243,7 +243,7 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
           uid: semester.get('slug') + '-' + section.get('crn'),
           start: startDate.toDate(),
           end: startDateFinish.toDate(),
-          timezone: 'America/New_York',
+          timezone: school.get('timezone'),
           repeating: {
             freq: 'WEEKLY',
             byDay: day.repeat,
