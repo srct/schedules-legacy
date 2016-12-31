@@ -89,7 +89,7 @@ var syncSections = function (semester) {
       'title': rawSection.title,
       'section': rawSection.section,
       'semester': semester.slug, // this is the field setting the relationship
-      'instructors': '', // build this from all total instructors
+      'instructor': '', // build this from all total instructors
       'campus': rawSection.campus,
       'location': '', // taken from only the first session_template
       'class_type': '', // taken from only the first session_template
@@ -170,8 +170,8 @@ var syncSections = function (semester) {
           //       one section. (ie. currently if you have 2 instructors in
           //       one section it'll search for all of them as one term and
           //       consequently add all of them to the full list.) Should
-          if (section.instructors.search(session_template.instructors) < 0) {
-            section.instructors += session_template.instructors
+          if (section.instructor.search(session_template.instructors) < 0) {
+            section.instructor += session_template.instructors
           }
         }
       })
