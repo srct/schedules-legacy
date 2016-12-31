@@ -16,14 +16,13 @@ var path = require('path')
 var router = express.Router()
 var ical = require('ical-generator')        // ical-generator library
 var config = require('config')              // Site wide configs
-var schoolSlugs = config.get('schoolSlugs') // Configured School Slugs
+//var schoolSlugs = config.get('schoolSlugs') // Configured School Slugs
 var db = require('models')                  // Database Object
 var helpers = require(path.join(__dirname, '..', '..', 'helpers'))
 var moment = require('moment')
-var _ = require('lodash')
+//var _ = require('lodash')
 
-
-////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
 // JSON API Definitions
 // TODO: separate out into its own file
 
@@ -40,8 +39,7 @@ router.get('/json/schools', function (req, res, next) {
   db.University.findAll({
     attributes: ['slug', 'name', 'website']
   }).then(function (query) {
-    var schools
-    res.json(query)
+    res.json(query.dataValues)
   })
 })
 
@@ -92,8 +90,8 @@ router.get('/json/classes/:SEMSLUG', function (req, res, next) {
 router.get('/json/classes/:SEMESTER/:CRN', function (req, res, next) {
   db.Section.findAll({
     where: {
-      'crn'      : req.params['CRN'],
-      'semester' : req.params(['SEMESTER'])
+      'crn': req.params['CRN'],
+      'semester': req.params(['SEMESTER'])
     }
   }).then(function (query) {
     res.json(query)
@@ -182,7 +180,7 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
     })
 
   // TODO: look into separating this out into it's own helper file
-  var makeCalendar = function(school, semester, sections) {
+  var makeCalendar = function (school, semester, sections) {
     // Generate blank calendar
     var cal = ical(
       {
@@ -221,9 +219,9 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
         }
 
         var processTime = function(time) {
-          var hour = parseInt(time.substring(0,2))
-          var min = parseInt(time.substring(3,5))
-          if (time.substring(6,8) === 'pm' && hour !== 12) {
+          var hour = parseInt(time.substring(0, 2))
+          var min = parseInt(time.substring(3, 5))
+          if (time.substring(6, 8) === 'pm' && hour !== 12) {
             hour += 12
           }
           return {'hour': hour, 'min': min}
@@ -239,7 +237,7 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
         startDateFinish.hour(endTime.hour)
         startDateFinish.minute(endTime.min)
 
-        event = cal.createEvent({
+        var event = cal.createEvent({
           uid: semester.get('slug') + '-' + section.get('crn'),
           start: startDate.utc(true).toDate(),
           end: startDateFinish.utc(true).toDate(),
@@ -249,15 +247,18 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
             until: endDate.utc(true).toDate()
           },
           summary: section.get('name'),
-          description: section.get('name') + ': ' + section.get('title') + ' (' + section.get('class_type') + ')\nSection: ' + section.get('section') + '\nInstructors: ' + section.get('instructor'),
+          description: (
+            section.get('name') + ': ' + section.get('title') + ' ('
+            + section.get('class_type') + ')\nSection: '
+            + section.get('section') + '\nInstructors: '
+            + section.get('instructor')
+          ),
           organizer: 'Mason SRCT <schedules@lists.srct.gmu.edu>',
           url: 'https://schedules.gmu.edu'
-        });
+        })
       })
 
     })
-
-
 
       // TODO: build the calendar events
 
@@ -271,10 +272,10 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
     ).then(function (queries) {
       // Check for invalid responses and throw appropriate errors
       if (!queries[0]) {
-        throw 'Invalid School Given!'
+        throw { message: 'Invalid School Given!' }
       }
       if (!queries[1]) {
-        throw 'Invalid Semester Given'
+        throw { message: 'Invalid Semester Given' }
       }
 
       // Generate the calendar

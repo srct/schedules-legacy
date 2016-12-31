@@ -81,7 +81,7 @@ var syncSections = function (semester) {
 
   for (var z = 0; z < rawSections.classes.length; z++) {
     var rawSection = rawSections.classes[z]
-    var sectionDateRange = rawSection.session_templates[0].date_range
+    var sectionDateRange = rawSection['session_templates'][0]['date_range']
 
     var section = {
       'crn': rawSection.crn,

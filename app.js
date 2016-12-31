@@ -41,7 +41,8 @@ app.use(require('node-sass-middleware')({
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Initialize the Database and Connection
-var db = require(path.join(__dirname, 'models'))
+// Not used currently so it's commented out
+// var db = require(path.join(__dirname, 'models'))
 
 // Populate initial data
 require(path.join(__dirname, 'data'))

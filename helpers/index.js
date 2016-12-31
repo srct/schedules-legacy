@@ -11,9 +11,9 @@
  *  tl;dr: Forget staying thirsty, "Stay DRY, my friends."
  */
 
-var ical = require('ical-generator')        // ical-generator library
-var config = require('config')              // Site wide configs
-var db = require('../models')               // Database Object
+//var ical = require('ical-generator')        // ical-generator library
+//var config = require('config')              // Site wide configs
+//var db = require('../models')               // Database Object
 
 /*
  * A brief note...since this is quite new and I don't know exactly how I want to
@@ -43,10 +43,9 @@ module.exports.strClean = strClean
  * @returns {Array|String}
  */
 var strSplitClean = function (rawString, separator) {
-
   // Validate input for separator
   if (separator && separator.length !== 1) {
-    throw 'separator must be a single char'
+    throw { message: 'separator must be a single char' }
   }
   if (!separator) {
     separator = ','

@@ -22,7 +22,8 @@ module.exports = function (sequelize, DataTypes) {
         unique: true,
         fields: ['slug']
       }
-    ], classMethods: {
+    ],
+    classMethods: {
       associate: function (models) {
         models.Semester.belongsTo(models.University, {foreignKey: 'university'})
         models.Semester.hasMany(models.Section, {foreignKey: 'semester'})
