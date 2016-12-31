@@ -133,12 +133,12 @@ var syncSections = function (semester) {
      * and or locations.
      */
     for (var c = 0; c < rawSection.session_templates.length; c++) {
-      var session_template = rawSection.session_templates[c]
+      var sessionTemplate = rawSection.session_templates[c]
       // raw value of the start/stop times (to be processed to time values)
-      var sessionTime = session_template.time;
+      var sessionTime = sessionTemplate.time;
 
       (['M', 'T', 'W', 'R', 'F']).forEach(function (day) {
-        if (session_template.days.indexOf(day) > -1) {
+        if (sessionTemplate.days.indexOf(day) > -1) {
           // if here then there is a session for the day
           section[day + 'session'] = true
 
@@ -162,16 +162,16 @@ var syncSections = function (semester) {
           section[day + 'timeEnd'] = sessionTime.substr(endOffset, endLength)
 
           // Note down location and type information
-          section[day + 'location'] = session_template.location
-          section[day + 'classType'] = session_template.class_type
+          section[day + 'location'] = sessionTemplate.location
+          section[day + 'classType'] = sessionTemplate.class_type
 
           // If the instructor is not yet in the entire listing, add it.
           // TODO: Make this tolerant of multiple instructors defined for
           //       one section. (ie. currently if you have 2 instructors in
           //       one section it'll search for all of them as one term and
           //       consequently add all of them to the full list.) Should
-          if (section.instructor.search(session_template.instructors) < 0) {
-            section.instructor += session_template.instructors
+          if (section.instructor.search(sessionTemplate.instructors) < 0) {
+            section.instructor += sessionTemplate.instructors
           }
         }
       })

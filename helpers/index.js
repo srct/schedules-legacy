@@ -11,9 +11,9 @@
  *  tl;dr: Forget staying thirsty, "Stay DRY, my friends."
  */
 
-//var ical = require('ical-generator')        // ical-generator library
-//var config = require('config')              // Site wide configs
-//var db = require('../models')               // Database Object
+// var ical = require('ical-generator')        // ical-generator library
+// var config = require('config')              // Site wide configs
+// var db = require('../models')               // Database Object
 
 /*
  * A brief note...since this is quite new and I don't know exactly how I want to
@@ -21,6 +21,12 @@
  *
  * TODO: Make this not suck (dynamic loading of other files maybe?)
  */
+
+var userException = function (message) {
+  this.message = message
+  this.name = 'userException'
+}
+module.exports.userException = userException
 
 /**
  * Strip all non alpha numeric characters from input.
@@ -45,7 +51,7 @@ module.exports.strClean = strClean
 var strSplitClean = function (rawString, separator) {
   // Validate input for separator
   if (separator && separator.length !== 1) {
-    throw { message: 'separator must be a single char' }
+    throw new userException('separator must be a single char')
   }
   if (!separator) {
     separator = ','
