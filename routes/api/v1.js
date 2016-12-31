@@ -12,11 +12,13 @@
 
 // Load Environment
 var express = require('express')
+var path = require('path')
 var router = express.Router()
 var ical = require('ical-generator')        // ical-generator library
 var config = require('config')              // Site wide configs
 var schoolSlugs = config.get('schoolSlugs') // Configured School Slugs
 var db = require('models')                  // Database Object
+var helpers = require(path.join(__dirname, '..', '..', 'helpers'))
 
 ////////////////////////////////////////////////////////////////////////////////
 // JSON API Definitions
@@ -164,12 +166,7 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
 
   //  Get Section Information
   var sectionArgs = req.params['SECTIONS']
-  var semesterSlugs = []
-
-  //  Parse Section Args
-  sectionArgs.split(',').forEach(function (sectionArg) {
-    semesterSlugs.push(db.sequelize.escape(sectionArg))
-  })
+  var semesterSlugs = helpers.strSplitClean(sectionArgs)
 
   var sections = db.Section
     .findAll({
@@ -191,8 +188,21 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
         'name'   : school.get('slug') + ' Class Schedule Fall 2016'
       }
     )
-
     // Build the rest of the calendar
+    sections.forEach(function (section) {
+      console.log(section.dataValues.name)
+      event = cal.createEvent({
+        uid: semester.dataValues.slug + '-' + section.dataValues.crn,
+        start: new Date(new Date().getTime() + 3600000),
+        end: new Date(new Date().getTime() + 7200000),
+        summary: 'Example Event',
+        description: 'It works ;)',
+        organizer: 'Organizer\'s Name <organizer@example.com>',
+        url: 'http://sebbo.net/'
+      });
+    })
+
+
 
       // TODO: build the calendar events
 
