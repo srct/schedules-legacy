@@ -15,9 +15,14 @@ module.exports = function (sequelize, DataTypes) {
     website: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+
+    timezone: {
+      type: DataTypes.STRING,
+      defaultValue: 'America/New_York'
     }
   }, {
-    idexes: [
+    indexes: [
       {
         unique: true,
         fields: ['slug']

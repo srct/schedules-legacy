@@ -19,7 +19,7 @@ var config = require('config')              // Site wide configs
 var schoolSlugs = config.get('schoolSlugs') // Configured School Slugs
 var db = require('models')                  // Database Object
 var helpers = require(path.join(__dirname, '..', '..', 'helpers'))
-var moment = require('moment')
+var moment = require('moment-timezone')
 var _ = require('lodash')
 
 
@@ -241,12 +241,13 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
 
         event = cal.createEvent({
           uid: semester.get('slug') + '-' + section.get('crn'),
-          start: startDate.utc(true).toDate(),
-          end: startDateFinish.utc(true).toDate(),
+          start: startDate.toDate(),
+          end: startDateFinish.toDate(),
+          timezone: 'America/New_York',
           repeating: {
             freq: 'WEEKLY',
             byDay: day.repeat,
-            until: endDate.utc(true).toDate()
+            until: endDate.toDate()
           },
           summary: section.get('name'),
           description: section.get('name') + ': ' + section.get('title') + ' (' + section.get('class_type') + ')\nSection: ' + section.get('section') + '\nInstructors: ' + section.get('instructor'),
