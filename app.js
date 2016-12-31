@@ -16,9 +16,9 @@ var bodyParser = require('body-parser')
 
 // Load in Routes
 // TODO: Make this a dynamic loading system that simply scans the directory
-var routes = require('./routes/index')
-var docs = require('./routes/docs')
-var apiV1 = require('./routes/api/v1')
+var routes = require(path.join(__dirname, 'routes'))
+var docs = require(path.join(__dirname, 'routes', 'docs'))
+var apiV1 = require(path.join(__dirname, 'routes', 'api', 'v1'))
 
 // Instantiate the application
 var app = express()
