@@ -269,10 +269,10 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
     ).then(function (queries) {
       // Check for invalid responses and throw appropriate errors
       if (!queries[0]) {
-        throw new helpers.userException('Invalid School Given!')
+        throw new helpers.UserException('Invalid School Given!')
       }
       if (!queries[1]) {
-        throw new helpers.userException('Invalid Semester Given')
+        throw new helpers.UserException('Invalid Semester Given')
       }
 
       // Generate the calendar
