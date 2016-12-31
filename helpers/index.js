@@ -22,11 +22,11 @@
  * TODO: Make this not suck (dynamic loading of other files maybe?)
  */
 
-var userException = function (message) {
+var UserException = function (message) {
   this.message = message
   this.name = 'userException'
 }
-module.exports.userException = userException
+module.exports.UserException = UserException
 
 /**
  * Strip all non alpha numeric characters from input.
@@ -51,7 +51,7 @@ module.exports.strClean = strClean
 var strSplitClean = function (rawString, separator) {
   // Validate input for separator
   if (separator && separator.length !== 1) {
-    throw new userException('separator must be a single char')
+    throw new UserException('separator must be a single char')
   }
   if (!separator) {
     separator = ','
