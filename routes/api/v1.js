@@ -19,6 +19,9 @@ var config = require('config')              // Site wide configs
 var schoolSlugs = config.get('schoolSlugs') // Configured School Slugs
 var db = require('models')                  // Database Object
 var helpers = require(path.join(__dirname, '..', '..', 'helpers'))
+var moment = require('moment')
+var _ = require('lodash')
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // JSON API Definitions
@@ -188,18 +191,70 @@ router.get('/ical/:SCHOOL/:SEMSLUG/:SECTIONS', function (req, res, next) {
         'name'   : school.get('slug') + ' Class Schedule Fall 2016'
       }
     )
+    cal.setTZ('America/New_York')
+
     // Build the rest of the calendar
     sections.forEach(function (section) {
-      console.log(section.dataValues.name)
-      event = cal.createEvent({
-        uid: semester.dataValues.slug + '-' + section.dataValues.crn,
-        start: new Date(new Date().getTime() + 3600000),
-        end: new Date(new Date().getTime() + 7200000),
-        summary: 'Example Event',
-        description: 'It works ;)',
-        organizer: 'Organizer\'s Name <organizer@example.com>',
-        url: 'http://sebbo.net/'
-      });
+
+      // Fetch the start and end times
+      var startDate = moment(section.get('startDate'), 'MMM DD, YYYY')
+      var endDate = moment(section.get('endDate'), 'MMM DD, YYYY')
+
+      var days = [
+        {'abrev': 'M', 'shift': 1, 'repeat': 'MO'}, // 1
+        {'abrev': 'T', 'shift': 2, 'repeat': 'TU'}, // 2
+        {'abrev': 'W', 'shift': 3, 'repeat': 'WE'}, // 3
+        {'abrev': 'R', 'shift': 4, 'repeat': 'TH'}, // 4
+        {'abrev': 'F', 'shift': 5, 'repeat': 'FR'}  // 5
+      ]
+
+      days.forEach(function (day) {
+        // check if the session exists
+        if (!section.get(day.abrev + 'session')) {
+          return
+        }
+
+        // figure out what the real start date is
+        if (startDate.day(day.shift) < startDate) {
+          startDate = startDate.add(7, 'd')
+          endDate = endDate.add(7, 'd')
+        }
+
+        var processTime = function(time) {
+          var hour = parseInt(time.substring(0,2))
+          var min = parseInt(time.substring(3,5))
+          if (time.substring(6,8) === 'pm' && hour !== 12) {
+            hour += 12
+          }
+          return {'hour': hour, 'min': min}
+        }
+
+        // Set times
+        var startTime = processTime(section.get(day.abrev + 'timeStart'))
+        startDate.hour(startTime.hour)
+        startDate.minute(startTime.min)
+
+        var endTime = processTime(section.get(day.abrev + 'timeEnd'))
+        var startDateFinish = startDate.clone()
+        startDateFinish.hour(endTime.hour)
+        startDateFinish.minute(endTime.min)
+
+        event = cal.createEvent({
+          uid: semester.get('slug') + '-' + section.get('crn'),
+          start: startDate.utc(true).toDate(),
+          end: startDateFinish.utc(true).toDate(),
+          repeating: {
+            freq: 'WEEKLY',
+            byDay: day.repeat,
+            until: endDate.utc(true).toDate()
+          },
+          summary: section.get('name'),
+          description: section.get('name') + ': ' + section.get('title') + ' (' + section.get('class_type') + ')\nSection: ' + section.get('section') + '\nInstructors: ' + section.get('instructor'),
+          organizer: 'Mason SRCT <schedules@lists.srct.gmu.edu>',
+          url: 'https://schedules.gmu.edu'
+        });
+      })
+
     })
 
 
