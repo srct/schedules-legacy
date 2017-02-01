@@ -36,16 +36,6 @@ instructions by making them relatively platform independent).
 
 `nvm install node`
 
-### sqlite
-
-You will need to install sqlite3. How this is done is dependent on your system
-but for `apt` systems this is as simple as:
-
-`sudo apt install sqlite3`
-
-A note: This project uses MySQL in deployment, but don't worry about that just
-yet.
-
 ### Project Dependencies
 
 Simply navigate to the root directory and type `npm install`, and you should
